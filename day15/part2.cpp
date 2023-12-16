@@ -1,5 +1,5 @@
 /**
- * @file part1.cpp
+ * @file part2.cpp
  * @brief Lens Library - Focusing Power of Resulting Lens Configuration
  *
  * Follow the initialization sequence (HASHMAP procedure) and configure the
