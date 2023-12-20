@@ -1,14 +1,13 @@
 /**
- * @file part1.cpp
- * @brief Pulse Propagation - Number of Pulses Calculation
+ * @file part2.cpp
+ * @brief Pulse Propagation - Fewest Button Presses for Module Activation
  *
  * Given a module configuration with different module types (flip-flop,
- * conjunction, broadcaster) and their connections, simulate the pulse
- * propagation sequence after pushing the button 1000 times. Determine the
- * number of low pulses and high pulses sent after each push of the button and
- * calculate the total by multiplying the respective counts. The pulses are
- * processed in the order they are sent, and modules have specific behaviors
- * based on their types.
+ * conjunction, broadcaster) and their connections, reset all modules to their
+ * default states. Determine the fewest number of button presses required to
+ * deliver a single low pulse to the module named rx. Waiting for all pulses to
+ * be fully handled after each button press, simulate the pulse propagation
+ * sequence and calculate the minimum number of button presses.
  *
  * Example Input:
  * broadcaster -> a, b, c
@@ -16,13 +15,14 @@
  * %b -> c
  * %c -> inv
  * &inv -> a
+ * rx -> ...
  *
  * Example Output:
- * Total Low Pulses * Total High Pulses: 32000000
+ * Fewest Button Presses for rx Activation: 42
  *
- * Calculate the total number of low pulses and high pulses sent after pushing
- * the button 1000 times, waiting for all pulses to be fully handled after each
- * push.
+ * Calculate the fewest number of button presses required to deliver a single
+ * low pulse to the module named rx, waiting for all pulses to be fully handled
+ * after each button press.
  *
  * @author [gabrielzschmitz]
  * @date [20/12/2023]
