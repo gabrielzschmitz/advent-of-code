@@ -80,7 +80,7 @@ struct pair_hash {
 };
 
 int recursiveDFS(
-    const pair<int, int>& pt, const pair<int, int>& end,
+    pair<int, int>& pt, const pair<int, int>& end,
     const unordered_map<pair<int, int>, unordered_map<pair<int, int>, int>,
                         pair_hash>& graph,
     unordered_set<pair<int, int>, pair_hash>& seenSet) {
@@ -92,7 +92,7 @@ int recursiveDFS(
 
   seenSet.insert(pt);
   for (const auto& entry : graph.at(pt)) {
-    const auto& nx = entry.first;
+    pair<int, int> nx = entry.first;
     const auto& w = entry.second;
     if (seenSet.find(nx) == seenSet.end()) {
       m = max(m, recursiveDFS(nx, end, graph, seenSet) + w);
@@ -119,8 +119,8 @@ int main(int argc, char* argv[]) {
   string line;
   while (getline(input_file, line)) map.push_back(line);
 
-  pair<int, int> start = {0, map[0].find('.')};
-  pair<int, int> end = {map.size() - 1, map[map.size() - 1].find('.')};
+  pair<int, int> start = {1, map[1].find('.')};
+  pair<int, int> end = {map.size() - 2, map[map.size() - 2].find('.')};
   vector<pair<int, int>> points = {start, end};
   if (debug)
     cout << "(" << start.first << ", " << start.second << ") (" << end.first
@@ -132,10 +132,10 @@ int main(int argc, char* argv[]) {
       if (map[row][column] == '#') continue;
 
       int neighbors = 0;
-      for (const auto& neighbor : vector<pair<int, int>>{{row - 1, column},
-                                                         {row + 1, column},
-                                                         {row, column - 1},
-                                                         {row, column + 1}}) {
+      for (const auto& neighbor : vector<pair<int, int>>{{row + 1, column},
+                                                         {row, column + 1},
+                                                         {row - 1, column},
+                                                         {row, column - 1}}) {
         int nRow = neighbor.first;
         int nColumn = neighbor.second;
         if (0 <= nRow && nRow < map.size() && 0 <= nColumn &&
@@ -173,7 +173,7 @@ int main(int argc, char* argv[]) {
         continue;
       }
 
-      vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+      vector<pair<int, int>> directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
       for (const pair<int, int>& direction : directions) {
         const int dRow = direction.first;
         const int dColumn = direction.second;
