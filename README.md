@@ -1,6 +1,6 @@
 <p align="center">
-    <img src="./img/calendar.png" alt="Calendar" width="400px">
-    <img src="./img/leaderboard.png" alt="Leaderboard" width="400px">
+    <img src="./img/calendar.png" alt="Calendar" width="350px">
+    <img src="./img/leaderboard.png" alt="Leaderboard" width="350px">
 </p>
 <h1 align="center">
     <br>
