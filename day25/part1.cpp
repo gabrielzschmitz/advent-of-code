@@ -1,3 +1,36 @@
+/**
+ * @file part1.cpp
+ * @brief Snowverload - Component Disconnection
+ *
+ * Given a wiring diagram that shows how components are connected, find the
+ * three wires to disconnect to divide the components into two separate groups.
+ * Multiply the sizes of these two groups together.
+ *
+ * Example Input:
+ * jqt: rhn xhk nvd
+ * rsh: frs pzl lsr
+ * xhk: hfx
+ * cmg: qnr nvd lhk bvb
+ * rhn: xhk bvb hfx
+ * bvb: xhk hfx
+ * pzl: lsr hfx nvd
+ * qnr: nvd
+ * ntq: jqt hfx bvb xhk
+ * nvd: lhk
+ * lsr: lhk
+ * rzs: qnr cmg lsr rsh
+ * frs: qnr lhk lsr
+ *
+ * Example Output:
+ * 54
+ *
+ * Find the three wires to disconnect in order to divide the components into two
+ * separate groups. What do you get if you multiply the sizes of these two
+ * groups together?
+ *
+ * @author [gabrielzschmitz]
+ * @date [25/12/2023]
+ */
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -126,7 +159,7 @@ int main() {
   }
 
   vertices.resize(nodes_to_add.size());
-  std::copy(nodes_to_add.begin(), nodes_to_add.end(), vertices.begin());
+  copy(nodes_to_add.begin(), nodes_to_add.end(), vertices.begin());
   nodes_to_add.clear();
 
   map<string, vector<string>> edges_copy = edges;
