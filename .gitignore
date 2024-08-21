@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+build
+part1
+part2
