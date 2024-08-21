@@ -41,11 +41,11 @@
  * @author [gabrielzschmitz]
  * @date [03/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <cmath>
+#include <fstream>
+#include <iostream>
 #include <tuple>
+#include <vector>
 using namespace std;
 
 struct Engine {
@@ -97,18 +97,14 @@ vector<tuple<int, int>> check_neighbors(const vector<string>& maps, int ID,
   // ABOVE
   if (IDy > 0) {
     for (int i = IDx; i < IDx + to_string(ID).length(); i++) {
-      if (maps[IDy - 1][i] == '*') {
-        especials.emplace_back(IDy - 1, i);
-      }
+      if (maps[IDy - 1][i] == '*') { especials.emplace_back(IDy - 1, i); }
     }
   }
 
   // BELOW
   if (IDy < maps.size() - 1) {
     for (int i = IDx; i < IDx + to_string(ID).length(); i++) {
-      if (maps[IDy + 1][i] == '*') {
-        especials.emplace_back(IDy + 1, i);
-      }
+      if (maps[IDy + 1][i] == '*') { especials.emplace_back(IDy + 1, i); }
     }
   }
 
@@ -117,9 +113,7 @@ vector<tuple<int, int>> check_neighbors(const vector<string>& maps, int ID,
     int ymin = max(0, IDy - 1);
     int ymax = min(static_cast<int>(maps.size()) - 1, IDy + 1);
     for (int i = ymin; i <= ymax; i++) {
-      if (maps[i][IDx - 1] == '*') {
-        especials.emplace_back(i, IDx - 1);
-      }
+      if (maps[i][IDx - 1] == '*') { especials.emplace_back(i, IDx - 1); }
     }
   }
 
@@ -146,9 +140,7 @@ vector<Engine> search_engines(const vector<string>& maps) {
     vector<tuple<int, int>> especials;
 
     for (int j = 0; j < maps[0].size(); j++) {
-      if (isdigit(maps[i][j])) {
-        ID = ID * 10 + (maps[i][j] - '0');
-      }
+      if (isdigit(maps[i][j])) { ID = ID * 10 + (maps[i][j] - '0'); }
 
       if (j + 1 == maps[0].size() ||
           (!isdigit(maps[i][j + 1]) && isdigit(maps[i][j]))) {

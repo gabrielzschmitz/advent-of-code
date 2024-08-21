@@ -27,14 +27,14 @@
  * @author [gabrielzschmitz]
  * @date [22/12/2023]
  */
+#include <algorithm>
+#include <deque>
+#include <fstream>
+#include <iostream>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
-#include <algorithm>
-#include <iostream>
-#include <fstream>
 #include <vector>
-#include <deque>
-#include <set>
 using namespace std;
 bool debug = false;
 
@@ -111,12 +111,11 @@ int main(int argc, char* argv[]) {
     deque<int> queue;
 
     for (int j : kSupportsV[i])
-      if (vSupportsK[j].size() == 1) {
-        queue.push_back(j);
-      }
+      if (vSupportsK[j].size() == 1) { queue.push_back(j); }
 
     set<int> falling = {i};
-    for (int q : queue) falling.insert(q);
+    for (int q : queue)
+      falling.insert(q);
 
     while (!queue.empty()) {
       int j = queue.front();

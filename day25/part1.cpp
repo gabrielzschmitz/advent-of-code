@@ -31,20 +31,15 @@
  * @author [gabrielzschmitz]
  * @date [25/12/2023]
  */
-#include <iostream>
-#include <string>
-#include <sstream>
 #include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
-#include <vector>
-#include <map>
-#include <unordered_map>
-#include <set>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <tuple>
 #include <cassert>
+#include <map>
+#include <set>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -86,9 +81,7 @@ void absorb_node(string absorbing, string new_parent) {
 
   for (auto it = edges.begin(); it != edges.end(); it++) {
     for (string& s : it->second) {
-      if (s == absorbing) {
-        s = new_parent;
-      }
+      if (s == absorbing) { s = new_parent; }
     }
   }
 

@@ -38,15 +38,12 @@
  * @author [gabrielzschmitz]
  * @date [19/12/2023]
  */
-#include <unordered_map>
+#include <fstream>
 #include <functional>
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <limits>
-#include <vector>
-#include <tuple>
 #include <map>
+#include <sstream>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -128,10 +125,8 @@ Workflow findWorkflowByID(const vector<Workflow>& workflows, const string& ID) {
 
 bool processPart(const vector<Workflow>& workflows, const Parts& item,
                  string ID = "in") {
-  if (ID == "R")
-    return false;
-  else if (ID == "A")
-    return true;
+  if (ID == "R") return false;
+  else if (ID == "A") return true;
 
   Workflow currentWorkflow = findWorkflowByID(workflows, ID);
 
@@ -169,7 +164,8 @@ void readInput(ifstream& input_file, vector<Workflow>& workflows,
     if (debug) {
       cout << "ID: " << current.ID << "\n";
       cout << "Rules:\n";
-      for (const auto& rule : current.rules) cout << "  " << rule << "\n";
+      for (const auto& rule : current.rules)
+        cout << "  " << rule << "\n";
       cout << "Fallback: " << current.fallback << "\n\n";
     }
 

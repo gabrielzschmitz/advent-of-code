@@ -48,12 +48,12 @@
  * @author [gabrielzschmitz]
  * @date [07/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <cstdint>
-#include <vector>
 #include <algorithm>
+#include <cstdint>
+#include <fstream>
+#include <iostream>
 #include <unordered_map>
+#include <vector>
 using namespace std;
 
 enum HandType {
@@ -75,53 +75,32 @@ struct CamelCards {
 
 string handTypeToString(HandType type) {
   switch (type) {
-    case FiveOfKind:
-      return "FiveOfKind";
-    case FourOfKind:
-      return "FourOfKind";
-    case FullHouse:
-      return "FullHouse";
-    case ThreeOfAKind:
-      return "ThreeOfAKind";
-    case TwoPair:
-      return "TwoPair";
-    case OnePair:
-      return "OnePair";
-    case HighCard:
-      return "HighCard";
-    default:
-      return "Unknown";
+    case FiveOfKind: return "FiveOfKind";
+    case FourOfKind: return "FourOfKind";
+    case FullHouse: return "FullHouse";
+    case ThreeOfAKind: return "ThreeOfAKind";
+    case TwoPair: return "TwoPair";
+    case OnePair: return "OnePair";
+    case HighCard: return "HighCard";
+    default: return "Unknown";
   }
 }
 
 int cardValue(char card) {
   switch (card) {
-    case 'A':
-      return 13;
-    case 'K':
-      return 12;
-    case 'Q':
-      return 11;
-    case 'T':
-      return 10;
-    case '9':
-      return 9;
-    case '8':
-      return 8;
-    case '7':
-      return 7;
-    case '6':
-      return 6;
-    case '5':
-      return 5;
-    case '4':
-      return 4;
-    case '3':
-      return 3;
-    case '2':
-      return 2;
-    case 'J':
-      return 1;
+    case 'A': return 13;
+    case 'K': return 12;
+    case 'Q': return 11;
+    case 'T': return 10;
+    case '9': return 9;
+    case '8': return 8;
+    case '7': return 7;
+    case '6': return 6;
+    case '5': return 5;
+    case '4': return 4;
+    case '3': return 3;
+    case '2': return 2;
+    case 'J': return 1;
   }
   return 0;
 }
@@ -175,22 +154,14 @@ void determineHandType(CamelCards& hand) {
   maxCount += jokerCount;
   cout << maxCount << ", " << secondMaxCount << endl;
 
-  if (maxCount >= 5)
-    hand.type = FiveOfKind;
-  else if (maxCount == 4)
-    hand.type = FourOfKind;
-  else if (maxCount == 3 && secondMaxCount == 2)
-    hand.type = FullHouse;
-  else if (maxCount == 3 && secondMaxCount == 3)
-    hand.type = ThreeOfAKind;
-  else if (maxCount == 3 && secondMaxCount == 1)
-    hand.type = ThreeOfAKind;
-  else if (maxCount == 2 && secondMaxCount == 2)
-    hand.type = TwoPair;
-  else if (maxCount == 2 && secondMaxCount == 1)
-    hand.type = OnePair;
-  else
-    hand.type = HighCard;
+  if (maxCount >= 5) hand.type = FiveOfKind;
+  else if (maxCount == 4) hand.type = FourOfKind;
+  else if (maxCount == 3 && secondMaxCount == 2) hand.type = FullHouse;
+  else if (maxCount == 3 && secondMaxCount == 3) hand.type = ThreeOfAKind;
+  else if (maxCount == 3 && secondMaxCount == 1) hand.type = ThreeOfAKind;
+  else if (maxCount == 2 && secondMaxCount == 2) hand.type = TwoPair;
+  else if (maxCount == 2 && secondMaxCount == 1) hand.type = OnePair;
+  else hand.type = HighCard;
 }
 
 // Comparison function for sorting CamelCards based on strength
@@ -223,8 +194,7 @@ vector<CamelCards> inputToStruct(ifstream& input_file) {
       hand.type = HighCard;
       hand.rank = 0;
       camel.push_back(hand);
-    } else
-      cerr << "Error parsing line: " << line << endl;
+    } else cerr << "Error parsing line: " << line << endl;
   }
 
   for (CamelCards& current : camel) {

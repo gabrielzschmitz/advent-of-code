@@ -27,14 +27,13 @@
  * @author [gabrielzschmitz]
  * @date [20/12/2023]
  */
-#include <unordered_map>
-#include <iostream>
-#include <sstream>
 #include <fstream>
-#include <vector>
-#include <queue>
-#include <stack>
+#include <iostream>
 #include <map>
+#include <queue>
+#include <sstream>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -105,9 +104,7 @@ struct Module {
 
   void receive_pulse(bool bHigh, const Module* from) {
     if (module_type == EModuleType::flipflop) {
-      if (bHigh) {
-        return;
-      }
+      if (bHigh) { return; }
 
       bTurnedOn = !bTurnedOn;
       send_pulse(bTurnedOn);
@@ -193,7 +190,7 @@ int main(int argc, char* argv[]) {
     }
 
     EModuleType type =
-        (m[0] == '%') ? EModuleType::flipflop : EModuleType::conjunction;
+      (m[0] == '%') ? EModuleType::flipflop : EModuleType::conjunction;
     Module* new_entry = new Module(m.substr(1), type);
     modules[new_entry->name] = new_entry;
     module_order.push_back(new_entry);

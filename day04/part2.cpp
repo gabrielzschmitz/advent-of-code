@@ -27,12 +27,11 @@
  * @author [gabrielzschmitz]
  * @date [04/12/2023]
  */
-#include <iostream>
 #include <fstream>
-#include <vector>
-#include <string>
+#include <iostream>
 #include <sstream>
-#include <algorithm>
+#include <string>
+#include <vector>
 using namespace std;
 
 struct Cards {
@@ -61,10 +60,12 @@ int main(int argc, char* argv[]) {
     Cards game;
     string cardString;
     iss >> cardString >> game.card >>
-        cardString;  // Extracting the "Card" and card number
-    for (int i = 0; i < 10; i++) iss >> game.winning_cards[i];
+      cardString;  // Extracting the "Card" and card number
+    for (int i = 0; i < 10; i++)
+      iss >> game.winning_cards[i];
     iss >> cardString;  // Skipping the "|"
-    for (int i = 0; i < 25; i++) iss >> game.my_cards[i];
+    for (int i = 0; i < 25; i++)
+      iss >> game.my_cards[i];
     games.push_back(game);
   }
 
@@ -85,9 +86,7 @@ int score_cards(const vector<Cards>& games) {
     Cards current_card = games[i];
     for (int win : current_card.winning_cards) {
       for (int my : current_card.my_cards) {
-        if (my == win) {
-          wins++;
-        }
+        if (my == win) { wins++; }
       }
     }
 
@@ -98,6 +97,7 @@ int score_cards(const vector<Cards>& games) {
     }
   }
 
-  for (int i = 0; i < games.size(); i++) total += cards[i];
+  for (int i = 0; i < games.size(); i++)
+    total += cards[i];
   return total;
 }

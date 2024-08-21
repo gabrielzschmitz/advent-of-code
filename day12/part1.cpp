@@ -20,12 +20,12 @@
  * @author [gabrielzschmitz]
  * @date [12/12/2023]
  */
-#include <iostream>
 #include <fstream>
-#include <vector>
+#include <iostream>
 #include <string>
-#include <unordered_map>
 #include <tuple>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 namespace std {
@@ -47,9 +47,7 @@ unordered_map<tuple<int, int, int>, int> DP;
 int f(const string& dots, const vector<int>& blocks, int i, int bi,
       int current) {
   tuple<int, int, int> key = make_tuple(i, bi, current);
-  if (DP.find(key) != DP.end()) {
-    return DP[key];
-  }
+  if (DP.find(key) != DP.end()) { return DP[key]; }
   if (i == dots.length()) {
     if (bi == blocks.size() && current == 0) {
       return 1;

@@ -42,14 +42,14 @@
  * @author [gabrielzschmitz]
  * @date [23/12/2023]
  */
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <stack>
 #include <unordered_map>
 #include <unordered_set>
-#include <algorithm>
-#include <iostream>
-#include <fstream>
-#include <limits>
 #include <vector>
-#include <stack>
 using namespace std;
 
 namespace std {
@@ -80,13 +80,11 @@ struct pair_hash {
 };
 
 int recursiveDFS(
-    const pair<int, int>& pt, const pair<int, int>& end,
-    const unordered_map<pair<int, int>, unordered_map<pair<int, int>, int>,
-                        pair_hash>& graph,
-    unordered_set<pair<int, int>, pair_hash>& seenSet) {
-  if (pt == end) {
-    return 0;
-  }
+  const pair<int, int>& pt, const pair<int, int>& end,
+  const unordered_map<pair<int, int>, unordered_map<pair<int, int>, int>,
+                      pair_hash>& graph,
+  unordered_set<pair<int, int>, pair_hash>& seenSet) {
+  if (pt == end) { return 0; }
 
   int m = -numeric_limits<int>::infinity();
 
@@ -117,7 +115,8 @@ int main(int argc, char* argv[]) {
   vector<string> map;
 
   string line;
-  while (getline(input_file, line)) map.push_back(line);
+  while (getline(input_file, line))
+    map.push_back(line);
 
   pair<int, int> start = {0, map[0].find('.')};
   pair<int, int> end = {map.size() - 1, map[map.size() - 1].find('.')};
@@ -148,13 +147,13 @@ int main(int argc, char* argv[]) {
   }
 
   unordered_map<pair<int, int>, unordered_map<pair<int, int>, int>, pair_hash>
-      graph;
+    graph;
   unordered_map<char, vector<pair<int, int>>> dirs = {
-      {'^', {{-1, 0}}},
-      {'v', {{1, 0}}},
-      {'<', {{0, -1}}},
-      {'>', {{0, 1}}},
-      {'.', {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}},
+    {'^', {{-1, 0}}},
+    {'v', {{1, 0}}},
+    {'<', {{0, -1}}},
+    {'>', {{0, 1}}},
+    {'.', {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}},
   };
 
   for (size_t i = 0; i < points.size(); ++i) {

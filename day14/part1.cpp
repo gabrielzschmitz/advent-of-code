@@ -29,9 +29,8 @@
  * @author [gabrielzschmitz]
  * @date [14/12/2023]
  */
-#include <algorithm>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -43,7 +42,8 @@ int processColumn(const vector<string>& dish, int column) {
   int row = 0;
 
   while (row < n) {
-    while (row < n && dish[row][column] == '#') row += 1;
+    while (row < n && dish[row][column] == '#')
+      row += 1;
 
     int start = row;
     int count = 0;
@@ -56,7 +56,8 @@ int processColumn(const vector<string>& dish, int column) {
       cout << "Column " << column << " Range from " << start << " to " << row
            << "; Count: " << count << endl;
 
-    for (int i = start; i < start + count; i++) answer += n - i;
+    for (int i = start; i < start + count; i++)
+      answer += n - i;
   }
   if (debug) cout << "Values from Column " << column << " " << answer << endl;
   return answer;
@@ -79,7 +80,8 @@ int main(int argc, char* argv[]) {
     dish.push_back(line);
   }
   if (debug)
-    for (string i : dish) cout << i << endl;
+    for (string i : dish)
+      cout << i << endl;
 
   int m = dish[0].size();
 

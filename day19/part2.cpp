@@ -36,13 +36,13 @@
  * @author [gabrielzschmitz]
  * @date [19/12/2023]
  */
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <algorithm>
-#include <regex>
+#include <fstream>
+#include <iostream>
 #include <map>
+#include <regex>
+#include <string>
+#include <vector>
 using namespace std;
 
 bool debug = false;

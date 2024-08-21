@@ -37,13 +37,12 @@
  * @author [gabrielzschmitz]
  * @date [08/12/2023]
  */
-#include <algorithm>
-#include <iostream>
-#include <fstream>
 #include <cstdint>
-#include <vector>
 #include <cstdio>
+#include <fstream>
+#include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 struct NetworkNode {

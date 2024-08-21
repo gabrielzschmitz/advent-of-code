@@ -39,14 +39,12 @@
  * @date [08/12/2023]
  */
 #include <algorithm>
-#include <iostream>
-#include <fstream>
 #include <cstdint>
-#include <numeric>
-#include <string>
-#include <sstream>
-#include <vector>
+#include <fstream>
+#include <iostream>
 #include <map>
+#include <string>
+#include <vector>
 using namespace std;
 
 static bool readFile(const string& fileName, vector<string>& lines) {
@@ -92,12 +90,8 @@ int main(int argc, char* argv[]) {
   vector<string> endNodes;
   for (const auto& kv : map) {
     const auto& node = kv.first;
-    if (node[2] == 'A') {
-      nodes.push_back(node);
-    }
-    if (node[2] == 'Z') {
-      endNodes.push_back(node);
-    }
+    if (node[2] == 'A') { nodes.push_back(node); }
+    if (node[2] == 'Z') { endNodes.push_back(node); }
   }
 
   auto cycles = vector<uint64_t>(nodes.size(), 0);
@@ -106,9 +100,7 @@ int main(int argc, char* argv[]) {
   do {
     const auto dir = lines[0][total % lines[0].size()];
     for (size_t i = 0; i < nodes.size(); ++i) {
-      if (cycles[i] > 0) {
-        continue;
-      }
+      if (cycles[i] > 0) { continue; }
       auto& node = nodes[i];
       if ('L' == dir) {
         node = map.at(node).first;
@@ -121,7 +113,7 @@ int main(int argc, char* argv[]) {
     }
     total++;
   } while (
-      !all_of(cycles.begin(), cycles.end(), [](uint64_t c) { return c > 0; }));
+    !all_of(cycles.begin(), cycles.end(), [](uint64_t c) { return c > 0; }));
 
   // Define a custom lcm function since C++11 doesn't have std::lcm
   auto lcm = [](uint64_t a, uint64_t b) -> uint64_t {

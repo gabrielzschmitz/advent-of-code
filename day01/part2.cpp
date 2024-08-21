@@ -33,15 +33,15 @@
  * @author [gabrielzschmitz]
  * @date [01/12/2023]
  */
-#include <iostream>
-#include <fstream>
 #include <cstring>
+#include <fstream>
+#include <iostream>
 #include <map>
 using namespace std;
 
 map<unsigned int, string> numbers = {
-    {0, "zero"}, {1, "one"}, {2, "two"},   {3, "three"}, {4, "four"},
-    {5, "five"}, {6, "six"}, {7, "seven"}, {8, "eight"}, {9, "nine"}};
+  {0, "zero"}, {1, "one"}, {2, "two"},   {3, "three"}, {4, "four"},
+  {5, "five"}, {6, "six"}, {7, "seven"}, {8, "eight"}, {9, "nine"}};
 int convert_line_to_int(int total, const string& line);
 
 int main(int argc, char* argv[]) {
@@ -74,17 +74,13 @@ int convert_line_to_int(int total, const string& line) {
     char c = *line_it;
     if (isdigit(c)) {
       last = c - '0';
-      if (-1 == first) {
-        first = last;
-      }
+      if (-1 == first) { first = last; }
     } else {
       for (const pair<unsigned int, string>& num : numbers) {
         if (strncmp(&line[distance(line.begin(), line_it)], num.second.c_str(),
                     num.second.length()) == 0) {
           last = num.first;
-          if (-1 == first) {
-            first = last;
-          }
+          if (-1 == first) { first = last; }
         }
       }
     }

@@ -32,14 +32,11 @@
  * @author [gabrielzschmitz]
  * @date [06/12/2023]
  */
-#include <cctype>
-#include <iostream>
-#include <cstdint>
-#include <fstream>
-#include <vector>
-#include <tuple>
-#include <sstream>
 #include <algorithm>
+#include <cctype>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -149,7 +146,8 @@ int main(int argc, char* argv[]) {
   input_file.close();
 
   vector<int> ways = waysCounter(races);
-  for (int i : ways) total = total * i;
+  for (int i : ways)
+    total = total * i;
 
   // Display the extracted information
   printRaces(races, "Races");

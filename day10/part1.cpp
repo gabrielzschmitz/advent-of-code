@@ -36,10 +36,10 @@
  * @author [gabrielzschmitz]
  * @date [10/12/2023]
  */
-#include <iostream>
 #include <fstream>
-#include <string>
+#include <iostream>
 #include <list>
+#include <string>
 using namespace std;
 
 enum State {
@@ -68,7 +68,7 @@ int interiorPoints(int area, int boundary_points) {
   return inter_points;
 }
 
-int area(list<Coordinates> &points) {
+int area(list<Coordinates>& points) {
   int areaVal = 0;
   list<Coordinates>::iterator current, next;
   current = points.begin();
@@ -94,7 +94,7 @@ int area(list<Coordinates> &points) {
   return areaVal / 2;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   ifstream input_file;
   input_file.open("input");
   string line;
@@ -118,9 +118,7 @@ int main(int argc, char **argv) {
        startLine++) {
     for (startPos = 0; startPos < startLine->length() && !startFound;
          startPos++) {
-      if ((*startLine)[startPos] == 'S') {
-        startFound = true;
-      }
+      if ((*startLine)[startPos] == 'S') { startFound = true; }
     }
     height++;
   }

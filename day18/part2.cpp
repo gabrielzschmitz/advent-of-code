@@ -35,13 +35,13 @@
  * @author [gabrielzschmitz]
  * @date [18/12/2023]
  */
-#include <unordered_map>
-#include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <iostream>
 #include <sstream>
-#include <vector>
 #include <tuple>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -49,7 +49,7 @@ bool debug = false;
 void followDigPlain(vector<tuple<int64_t, int64_t>>& digPlain,
                     int64_t& boundaryPoints, ifstream& input_file) {
   unordered_map<char, pair<int, int>> directions = {
-      {'U', {-1, 0}}, {'D', {1, 0}}, {'L', {0, -1}}, {'R', {0, 1}}};
+    {'U', {-1, 0}}, {'D', {1, 0}}, {'L', {0, -1}}, {'R', {0, 1}}};
 
   string line;
   while (getline(input_file, line)) {
@@ -96,8 +96,8 @@ int main(int argc, char* argv[]) {
   int64_t shoelaceArea = 0;
   for (int64_t i = 1; i < digPlain.size(); ++i)
     shoelaceArea +=
-        get<0>(digPlain[i]) *
-        (get<1>(digPlain[i - 1]) - get<1>(digPlain[(i + 1) % digPlain.size()]));
+      get<0>(digPlain[i]) *
+      (get<1>(digPlain[i - 1]) - get<1>(digPlain[(i + 1) % digPlain.size()]));
   shoelaceArea = abs(shoelaceArea) / 2;
 
   /* Pick's theorem */

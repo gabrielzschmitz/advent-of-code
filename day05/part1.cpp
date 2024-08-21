@@ -53,13 +53,12 @@
  * @author [gabrielzschmitz]
  * @date [05/12/2023]
  */
-#include <iostream>
 #include <cstdint>
 #include <fstream>
-#include <vector>
-#include <tuple>
+#include <iostream>
 #include <sstream>
-#include <unordered_map>
+#include <tuple>
+#include <vector>
 
 using namespace std;
 
@@ -141,26 +140,26 @@ int main() {
           break;
         case 2:
           input.soil_to_fertilizer.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 3:
           input.fertilizer_to_water.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 4:
           input.water_to_light.push_back(make_tuple(dest, src_start, length));
           break;
         case 5:
           input.light_to_temperature.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 6:
           input.temperature_to_humidity.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 7:
           input.humidity_to_location.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
       }
     }

@@ -20,11 +20,10 @@
  * @author [gabrielzschmitz]
  * @date [15/12/2023]
  */
-#include <algorithm>
-#include <iostream>
 #include <fstream>
-#include <vector>
+#include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -67,7 +66,8 @@ int main(int argc, char* argv[]) {
   getline(input_file, input);
   vector<string> initsequence = extractElements(input);
   if (debug)
-    for (string i : initsequence) cout << i << endl;
+    for (string i : initsequence)
+      cout << i << endl;
 
   for (string part : initsequence) {
     int current = HASH(part);

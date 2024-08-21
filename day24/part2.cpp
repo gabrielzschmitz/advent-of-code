@@ -40,7 +40,7 @@ struct Hail {
   Eigen::Vector3d vel;
 };
 
-std::vector<Hail> getHails(std::ifstream &inf) {
+std::vector<Hail> getHails(std::ifstream& inf) {
   std::vector<Hail> hails;
   std::string line;
   while (std::getline(inf, line)) {
@@ -64,13 +64,13 @@ std::vector<Hail> getHails(std::ifstream &inf) {
   return hails;
 }
 
-Eigen::Matrix3d getCoeffMat(const Eigen::Vector3d &v) {
+Eigen::Matrix3d getCoeffMat(const Eigen::Vector3d& v) {
   Eigen::Matrix3d coeffMat;
   coeffMat << 0, -v[2], v[1], v[2], 0, -v[0], -v[1], v[0], 0;
   return coeffMat;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   std::string user_input = (argc == 2) ? argv[1] : "input";
   if (debug) user_input = "test";
 
@@ -102,9 +102,9 @@ int main(int argc, char *argv[]) {
     Eigen::VectorXd rhs(6);
 
     rhs.segment<3>(0) =
-        hails[p0].pos.cross(hails[p0].vel) - hails[p1].pos.cross(hails[p1].vel);
+      hails[p0].pos.cross(hails[p0].vel) - hails[p1].pos.cross(hails[p1].vel);
     rhs.segment<3>(3) =
-        hails[p2].pos.cross(hails[p2].vel) - hails[p3].pos.cross(hails[p3].vel);
+      hails[p2].pos.cross(hails[p2].vel) - hails[p3].pos.cross(hails[p3].vel);
 
     equations.block<3, 3>(0, 0) = getCoeffMat(hails[p1].vel - hails[p0].vel);
     equations.block<3, 3>(3, 0) = getCoeffMat(hails[p3].vel - hails[p2].vel);
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
   int maxFreq{0};
   long sum{0};
   for (auto it = freqs.begin(); it != freqs.end(); ++it) {
-    const auto &entry = *it;
+    const auto& entry = *it;
     const long k = entry.first;
     const int v = entry.second;
     if (v > maxFreq) {

@@ -32,18 +32,16 @@
  * @author [gabrielzschmitz]
  * @date [07/12/2023]
  */
-#include <cctype>
-#include <ctime>
-#include <iostream>
-#include <cstdint>
-#include <fstream>
-#include <vector>
-#include <tuple>
-#include <sstream>
-#include <cstdio>
-#include <string>
 #include <algorithm>
+#include <cctype>
+#include <cstdint>
+#include <cstdio>
+#include <ctime>
+#include <fstream>
+#include <iostream>
+#include <string>
 #include <unordered_map>
+#include <vector>
 using namespace std;
 
 enum HandType {
@@ -65,53 +63,32 @@ struct CamelCards {
 
 string handTypeToString(HandType type) {
   switch (type) {
-    case FiveOfKind:
-      return "FiveOfKind";
-    case FourOfKind:
-      return "FourOfKind";
-    case FullHouse:
-      return "FullHouse";
-    case ThreeOfAKind:
-      return "ThreeOfAKind";
-    case TwoPair:
-      return "TwoPair";
-    case OnePair:
-      return "OnePair";
-    case HighCard:
-      return "HighCard";
-    default:
-      return "Unknown";
+    case FiveOfKind: return "FiveOfKind";
+    case FourOfKind: return "FourOfKind";
+    case FullHouse: return "FullHouse";
+    case ThreeOfAKind: return "ThreeOfAKind";
+    case TwoPair: return "TwoPair";
+    case OnePair: return "OnePair";
+    case HighCard: return "HighCard";
+    default: return "Unknown";
   }
 }
 
 int cardValue(char card) {
   switch (card) {
-    case 'A':
-      return 14;
-    case 'K':
-      return 13;
-    case 'Q':
-      return 12;
-    case 'J':
-      return 11;
-    case 'T':
-      return 10;
-    case '9':
-      return 9;
-    case '8':
-      return 8;
-    case '7':
-      return 7;
-    case '6':
-      return 6;
-    case '5':
-      return 5;
-    case '4':
-      return 4;
-    case '3':
-      return 3;
-    case '2':
-      return 2;
+    case 'A': return 14;
+    case 'K': return 13;
+    case 'Q': return 12;
+    case 'J': return 11;
+    case 'T': return 10;
+    case '9': return 9;
+    case '8': return 8;
+    case '7': return 7;
+    case '6': return 6;
+    case '5': return 5;
+    case '4': return 4;
+    case '3': return 3;
+    case '2': return 2;
   }
   return 0;
 }
@@ -139,9 +116,7 @@ void determineHandType(CamelCards& hand) {
   auto countChars = [](const string& str) {
     unordered_map<char, int> charCounts;
     for (char ch : str) {
-      if (isalnum(ch)) {
-        charCounts[ch]++;
-      }
+      if (isalnum(ch)) { charCounts[ch]++; }
     }
     return charCounts;
   };
@@ -160,20 +135,13 @@ void determineHandType(CamelCards& hand) {
     }
   }
 
-  if (maxCount == 5)
-    hand.type = FiveOfKind;
-  else if (maxCount == 4)
-    hand.type = FourOfKind;
-  else if (maxCount == 3 && secondMaxCount == 2)
-    hand.type = FullHouse;
-  else if (maxCount == 3 && secondMaxCount == 1)
-    hand.type = ThreeOfAKind;
-  else if (maxCount == 2 && secondMaxCount == 2)
-    hand.type = TwoPair;
-  else if (maxCount == 2 && secondMaxCount == 1)
-    hand.type = OnePair;
-  else
-    hand.type = HighCard;
+  if (maxCount == 5) hand.type = FiveOfKind;
+  else if (maxCount == 4) hand.type = FourOfKind;
+  else if (maxCount == 3 && secondMaxCount == 2) hand.type = FullHouse;
+  else if (maxCount == 3 && secondMaxCount == 1) hand.type = ThreeOfAKind;
+  else if (maxCount == 2 && secondMaxCount == 2) hand.type = TwoPair;
+  else if (maxCount == 2 && secondMaxCount == 1) hand.type = OnePair;
+  else hand.type = HighCard;
 }
 
 // Comparison function for sorting CamelCards based on strength
@@ -186,10 +154,8 @@ bool compareHands(const CamelCards& hand1, const CamelCards& hand2) {
   // Compare cards
   for (int i = 0; i < hand1.hand.size() + 1; ++i) {
     if (hand1.hand[i] != hand2.hand[i]) {
-      if (cardValue(hand1.hand[i]) > cardValue(hand2.hand[i]))
-        return false;
-      else
-        return true;
+      if (cardValue(hand1.hand[i]) > cardValue(hand2.hand[i])) return false;
+      else return true;
     }
   }
 
@@ -210,8 +176,7 @@ vector<CamelCards> inputToStruct(ifstream& input_file) {
       hand.type = HighCard;
       hand.rank = 0;
       camel.push_back(hand);
-    } else
-      cerr << "Error parsing line: " << line << endl;
+    } else cerr << "Error parsing line: " << line << endl;
   }
 
   for (CamelCards& current : camel) {

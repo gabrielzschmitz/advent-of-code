@@ -56,9 +56,11 @@ struct Equation2d {
   double speed;
 };
 
-bool isClose(double a, double b) { return std::abs(a - b) < kEpsilon; }
+bool isClose(double a, double b) {
+  return std::abs(a - b) < kEpsilon;
+}
 
-bool isIntersectingInFuture(const Equation2d &eq1, const Equation2d &eq2) {
+bool isIntersectingInFuture(const Equation2d& eq1, const Equation2d& eq2) {
   if (isClose(eq1.direction[0], eq2.direction[0]) &&
       isClose(eq1.direction[1], eq2.direction[1])) {
     return false;
@@ -70,7 +72,7 @@ bool isIntersectingInFuture(const Equation2d &eq1, const Equation2d &eq2) {
   double x{(eq2.yInt - eq1.yInt) / (m1 - m2)};
   double y{m1 * x + eq1.yInt};
 
-  for (const auto &eq : {eq1, eq2}) {
+  for (const auto& eq : {eq1, eq2}) {
     if ((x < eq.initPos[0] && eq.direction[0] > 0) ||
         (x > eq.initPos[0] && eq.direction[0] < 0)) {
       return false;
@@ -80,10 +82,10 @@ bool isIntersectingInFuture(const Equation2d &eq1, const Equation2d &eq2) {
   return x >= MIN_POS && x <= MAX_POS && y >= MIN_POS && y <= MAX_POS;
 }
 
-Equation2d hailToEquation2d(const Hail &hail) {
+Equation2d hailToEquation2d(const Hail& hail) {
   Vel direction{hail.vel};
   double speed{
-      std::sqrt(hail.vel[0] * hail.vel[0] + hail.vel[1] * hail.vel[1])};
+    std::sqrt(hail.vel[0] * hail.vel[0] + hail.vel[1] * hail.vel[1])};
 
   direction[0] /= speed;
   direction[1] /= speed;
@@ -95,7 +97,7 @@ Equation2d hailToEquation2d(const Hail &hail) {
   return {yInt, hail.pos, direction, speed};
 }
 
-std::vector<Equation2d> getEquations2d(std::ifstream &inf) {
+std::vector<Equation2d> getEquations2d(std::ifstream& inf) {
   std::vector<Equation2d> equations;
   std::string line;
   while (std::getline(inf, line)) {
@@ -119,7 +121,7 @@ std::vector<Equation2d> getEquations2d(std::ifstream &inf) {
   return equations;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   std::string user_input = (argc == 2) ? argv[1] : "input";
   if (debug) user_input = "test";
 

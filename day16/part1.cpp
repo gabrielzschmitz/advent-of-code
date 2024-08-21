@@ -29,11 +29,11 @@
  * @author [gabrielzschmitz]
  * @date [16/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <deque>
+#include <fstream>
+#include <iostream>
 #include <set>
+#include <vector>
 using namespace std;
 
 bool debug = false;

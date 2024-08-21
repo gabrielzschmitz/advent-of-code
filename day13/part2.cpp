@@ -34,12 +34,10 @@
  * @author [gabrielzschmitz]
  * @date [13/12/2023]
  */
-#include <iostream>
 #include <fstream>
-#include <vector>
-#include <sstream>
+#include <iostream>
 #include <utility>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -82,7 +80,8 @@ vector<string> transpose(const vector<string>& input) {
 pair<int, int> processPattern(vector<string> pattern,
                               pair<int, int> avoid = {-1, -1}) {
   if (debug) {
-    for (string i : pattern) cout << i << endl;
+    for (string i : pattern)
+      cout << i << endl;
     cout << endl;
   }
   int n = pattern.size();
@@ -114,19 +113,15 @@ int summarizePattern(const vector<string>& pattern) {
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < m; ++j) {
       vector<string> pattern_copy = pattern;
-      if (pattern[i][j] == '#')
-        pattern_copy[i][j] = '.';
-      else
-        pattern_copy[i][j] = '#';
+      if (pattern[i][j] == '#') pattern_copy[i][j] = '.';
+      else pattern_copy[i][j] = '#';
 
       pair<int, int> summ_new = processPattern(pattern_copy, summ_og);
 
       if (summ_new != summ_og && summ_new != make_pair(-1, -1)) {
         int contrib = 0;
-        if (summ_new.first != -1)
-          return (summ_new.first + 1) * 100;
-        else
-          return (summ_new.second + 1);
+        if (summ_new.first != -1) return (summ_new.first + 1) * 100;
+        else return (summ_new.second + 1);
       }
     }
   }

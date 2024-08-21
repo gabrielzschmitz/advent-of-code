@@ -27,11 +27,11 @@
  * @author [gabrielzschmitz]
  * @date [02/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
 #include <cmath>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <vector>
 using namespace std;
 
 struct Cube {
@@ -91,9 +91,7 @@ int get_game_ID(const string& line) {
 
   while (c != ':') {
     c = line[i];
-    if (isdigit(c)) {
-      number += c;
-    }
+    if (isdigit(c)) { number += c; }
     i++;
   }
 
@@ -109,7 +107,8 @@ vector<string> separate_rounds(string line) {
   istringstream raw_input(line);
 
   string tmp;
-  while (getline(raw_input, tmp, ';')) rounds.push_back(tmp);
+  while (getline(raw_input, tmp, ';'))
+    rounds.push_back(tmp);
 
   return rounds;
 }

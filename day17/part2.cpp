@@ -35,12 +35,11 @@
  * @author [gabrielzschmitz]
  * @date [17/12/2023]
  */
-#include <algorithm>
-#include <iostream>
 #include <fstream>
-#include <vector>
+#include <iostream>
 #include <queue>
 #include <set>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -135,12 +134,14 @@ int main(int argc, char* argv[]) {
   vector<vector<int>> heatMap;
   while (getline(input_file, line)) {
     vector<int> row;
-    for (char i : line) row.push_back(i - '0');
+    for (char i : line)
+      row.push_back(i - '0');
     heatMap.push_back(row);
   }
   if (debug) {
     for (vector<int> i : heatMap) {
-      for (int j : i) cout << j << ", ";
+      for (int j : i)
+        cout << j << ", ";
       cout << endl;
     }
   }

@@ -35,11 +35,11 @@
  * @author [gabrielzschmitz]
  * @date [11/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <algorithm>
 #include <cinttypes>
+#include <fstream>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 void markGalaxiesAndEmptys(const vector<string>& inputVector,
@@ -50,9 +50,7 @@ void markGalaxiesAndEmptys(const vector<string>& inputVector,
 
   for (int i = 0; i < numRows; ++i) {
     for (int j = 0; j < numCols; ++j) {
-      if (inputVector[i][j] == '#') {
-        galaxies.push_back(make_tuple(i, j));
-      }
+      if (inputVector[i][j] == '#') { galaxies.push_back(make_tuple(i, j)); }
     }
     emptys[i] = string(numCols, '.');
 
@@ -67,9 +65,7 @@ void markGalaxiesAndEmptys(const vector<string>& inputVector,
             break;
           }
         }
-        if (isColumnEmpty) {
-          emptys[i][j] = '1';
-        }
+        if (isColumnEmpty) { emptys[i][j] = '1'; }
       }
     }
   }

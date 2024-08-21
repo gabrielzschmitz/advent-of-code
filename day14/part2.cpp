@@ -29,12 +29,10 @@
  * @author [gabrielzschmitz]
  * @date [14/12/2023]
  */
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <algorithm>
-#include <numeric>
+#include <fstream>
+#include <iostream>
+#include <string>
 #include <unordered_map>
 using namespace std;
 
@@ -59,7 +57,9 @@ struct DishLoad {
 
 enum Direction { North = 0, West, South, East };
 
-bool operator==(const Dish& a, const Dish& b) { return a.map == b.map; }
+bool operator==(const Dish& a, const Dish& b) {
+  return a.map == b.map;
+}
 
 using Cache = unordered_map<Dish, DishLoad, DishHash>;
 
@@ -157,9 +157,7 @@ size_t calculateLoad(Dish& dish) {
   size_t sum = 0;
   for (int y = 0; y < dish.height; ++y) {
     for (int x = 0; x < dish.width; ++x) {
-      if (dish.get(x, y) == 'O') {
-        sum += dish.height - y;
-      }
+      if (dish.get(x, y) == 'O') { sum += dish.height - y; }
     }
   }
   return sum;
@@ -183,9 +181,9 @@ size_t summary(Dish dish) {
   }
 
   size_t idx = getIndex(cache[dish].idx, i);
-  auto it = find_if(
-      cache.begin(), cache.end(),
-      [&](const pair<Dish, DishLoad>& c) { return c.second.idx == idx; });
+  auto it =
+    find_if(cache.begin(), cache.end(),
+            [&](const pair<Dish, DishLoad>& c) { return c.second.idx == idx; });
   return it->second.load;
 }
 

@@ -30,13 +30,12 @@
  * @author [gabrielzschmitz]
  * @date [21/12/2023]
  */
-#include <unordered_set>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
 #include <deque>
+#include <fstream>
+#include <iostream>
 #include <tuple>
+#include <unordered_set>
+#include <vector>
 using namespace std;
 namespace std {
 template <>
@@ -64,12 +63,8 @@ int fillPlots(vector<string> gardenMap, int startRow, int startColumn,
     int steps = get<2>(front);
     queue.pop_front();
 
-    if (steps % 2 == 0) {
-      stepsCounter.insert({row, column});
-    }
-    if (steps == 0) {
-      continue;
-    }
+    if (steps % 2 == 0) { stepsCounter.insert({row, column}); }
+    if (steps == 0) { continue; }
 
     for (const auto& directionPair :
          vector<pair<int, int>>{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}) {
@@ -128,7 +123,8 @@ int main(int argc, char* argv[]) {
 
   string line;
   vector<string> gardenMap;
-  while (getline(input_file, line)) gardenMap.push_back(line);
+  while (getline(input_file, line))
+    gardenMap.push_back(line);
 
   pair<int, int> startingCordinates = findStartingCoordinates(gardenMap);
   if (debug)

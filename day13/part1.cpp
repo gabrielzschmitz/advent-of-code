@@ -37,10 +37,9 @@
  * @author [gabrielzschmitz]
  * @date [13/12/2023]
  */
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <vector>
-#include <sstream>
 using namespace std;
 
 bool debug = false;
@@ -82,7 +81,8 @@ vector<string> transpose(const vector<string>& input) {
 
 void processPattern(vector<string> pattern, int& total) {
   if (debug) {
-    for (string i : pattern) cout << i << endl;
+    for (string i : pattern)
+      cout << i << endl;
     cout << endl;
   }
   int n = pattern.size();

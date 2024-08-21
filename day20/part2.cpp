@@ -27,16 +27,15 @@
  * @author [gabrielzschmitz]
  * @date [20/12/2023]
  */
-#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <deque>
 #include <fstream>
+#include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <map>
-#include <deque>
-#include <cmath>
-#include <numeric>
 using namespace std;
 
 bool debug = false;
@@ -54,7 +53,9 @@ u64 gcd(u64 a, u64 b) {
   return a;
 }
 
-u64 lcm(u64 a, u64 b) { return (a / gcd(a, b)) * b; }
+u64 lcm(u64 a, u64 b) {
+  return (a / gcd(a, b)) * b;
+}
 
 enum class ModuleType : char { None, FlipFlop, Conjunction };
 
@@ -101,7 +102,8 @@ int main(int argc, char* argv[]) {
 
     Module m;
 
-    while (getline(ss, out, ',')) m.destinations.push_back(out.substr(1));
+    while (getline(ss, out, ','))
+      m.destinations.push_back(out.substr(1));
 
     if (name[0] == '%') {
       name = name.substr(1);
@@ -143,10 +145,8 @@ int main(int argc, char* argv[]) {
                             false);  // false low, true high
     while (!pulseQueue.empty()) {
       Pulse& p = pulseQueue.front();
-      if (p.high)
-        ++highs;
-      else
-        ++lows;
+      if (p.high) ++highs;
+      else ++lows;
       auto iter = modules.find(p.to);
       if (iter != modules.cend()) {
         Module& m = iter->second;

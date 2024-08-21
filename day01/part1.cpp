@@ -31,8 +31,8 @@
  * @author [gabrielzschmitz]
  * @date [01/12/2023]
  */
-#include <iostream>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 int convert_line_to_int(int total, const string& line);
@@ -65,9 +65,7 @@ int convert_line_to_int(int total, const string& line) {
   for (char c : line) {
     if (isdigit(c)) {
       last = c - '0';
-      if (first == -1) {
-        first = last;
-      }
+      if (first == -1) { first = last; }
     }
   }
 

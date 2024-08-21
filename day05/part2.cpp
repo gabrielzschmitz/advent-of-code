@@ -56,12 +56,12 @@
  * @author [gabrielzschmitz]
  * @date [05/12/2023]
  */
-#include <iostream>
 #include <cstdint>
 #include <fstream>
-#include <vector>
-#include <tuple>
+#include <iostream>
 #include <sstream>
+#include <tuple>
+#include <vector>
 using namespace std;
 
 struct Input {
@@ -105,11 +105,11 @@ int main() {
   string line;
   int section = -1;
   input.seed_ranges = {
-      make_pair(304740406, 53203352),   make_pair(1080760686, 52608146),
-      make_pair(1670978447, 367043978), make_pair(1445830299, 58442414),
-      make_pair(4012995194, 104364808), make_pair(4123691336, 167638723),
-      make_pair(2284615844, 178205532), make_pair(3164519436, 564398605),
-      make_pair(90744016, 147784453),   make_pair(577905361, 122056749)};
+    make_pair(304740406, 53203352),   make_pair(1080760686, 52608146),
+    make_pair(1670978447, 367043978), make_pair(1445830299, 58442414),
+    make_pair(4012995194, 104364808), make_pair(4123691336, 167638723),
+    make_pair(2284615844, 178205532), make_pair(3164519436, 564398605),
+    make_pair(90744016, 147784453),   make_pair(577905361, 122056749)};
   while (getline(input_file, line)) {
     if (line.empty()) {
       section = -1;  // Reset section when encountering an empty line
@@ -144,26 +144,26 @@ int main() {
           break;
         case 2:
           input.soil_to_fertilizer.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 3:
           input.fertilizer_to_water.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 4:
           input.water_to_light.push_back(make_tuple(dest, src_start, length));
           break;
         case 5:
           input.light_to_temperature.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 6:
           input.temperature_to_humidity.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
         case 7:
           input.humidity_to_location.push_back(
-              make_tuple(dest, src_start, length));
+            make_tuple(dest, src_start, length));
           break;
       }
     }

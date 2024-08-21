@@ -36,11 +36,10 @@
  * @author [gabrielzschmitz]
  * @date [03/12/2023]
  */
-#include <iostream>
 #include <fstream>
-#include <vector>
-#include <sstream>
+#include <iostream>
 #include <tuple>
+#include <vector>
 using namespace std;
 
 struct Engine {
@@ -137,9 +136,7 @@ vector<Engine> search_engines(const vector<string>& maps) {
     vector<tuple<int, int>> especials;
 
     for (int j = 0; j < maps[0].size(); j++) {
-      if (isdigit(maps[i][j])) {
-        ID = ID * 10 + (maps[i][j] - '0');
-      }
+      if (isdigit(maps[i][j])) { ID = ID * 10 + (maps[i][j] - '0'); }
 
       if (j + 1 == maps[0].size() ||
           (!isdigit(maps[i][j + 1]) && isdigit(maps[i][j]))) {

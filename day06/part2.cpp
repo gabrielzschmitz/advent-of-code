@@ -26,14 +26,12 @@
  * @author [gabrielzschmitz]
  * @date [06/12/2023]
  */
+#include <algorithm>
 #include <cctype>
-#include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <iostream>
 #include <vector>
-#include <tuple>
-#include <sstream>
-#include <algorithm>
 
 using namespace std;
 

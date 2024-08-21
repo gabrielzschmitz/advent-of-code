@@ -34,12 +34,12 @@
  * @author [gabrielzschmitz]
  * @date [18/12/2023]
  */
-#include <unordered_map>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
-#include <vector>
 #include <tuple>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -47,7 +47,7 @@ bool debug = false;
 void followDigPlain(vector<tuple<int, int>>& digPlain, int& boundaryPoints,
                     ifstream& input_file) {
   unordered_map<char, pair<int, int>> directions = {
-      {'U', {-1, 0}}, {'D', {1, 0}}, {'L', {0, -1}}, {'R', {0, 1}}};
+    {'U', {-1, 0}}, {'D', {1, 0}}, {'L', {0, -1}}, {'R', {0, 1}}};
 
   string line;
   while (getline(input_file, line)) {

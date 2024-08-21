@@ -20,11 +20,11 @@
  * @author [gabrielzschmitz]
  * @date [16/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <deque>
+#include <fstream>
+#include <iostream>
 #include <set>
+#include <vector>
 using namespace std;
 
 bool debug = false;
@@ -115,8 +115,8 @@ int main(int argc, char* argv[]) {
 
   for (int r = 0; r < static_cast<int>(grid.size()); ++r) {
     total = max(total, reachablePoints(r, -1, 0, 1, grid));
-    total = max(total, reachablePoints(r, static_cast<int>(grid[0].size()), 0,
-                                       -1, grid));
+    total = max(
+      total, reachablePoints(r, static_cast<int>(grid[0].size()), 0, -1, grid));
   }
 
   for (int c = 0; c < static_cast<int>(grid[0].size()); ++c) {

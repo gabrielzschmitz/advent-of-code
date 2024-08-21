@@ -20,9 +20,9 @@
  * @date [15/12/2023]
  */
 #include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <sstream>
-#include <fstream>
 #include <vector>
 using namespace std;
 
@@ -32,7 +32,8 @@ vector<string> extractElements(const string& inputString) {
   vector<string> result;
   istringstream iss(inputString);
   string token;
-  while (getline(iss, token, ',')) result.push_back(token);
+  while (getline(iss, token, ','))
+    result.push_back(token);
 
   return result;
 }
@@ -74,7 +75,8 @@ int main(int argc, char* argv[]) {
   getline(input_file, input);
   vector<string> initsequence = extractElements(input);
   if (debug)
-    for (string i : initsequence) cout << i << endl;
+    for (string i : initsequence)
+      cout << i << endl;
 
   vector<vector<pair<string, int>>> boxes(256);
   for (string part : initsequence) {
@@ -85,8 +87,8 @@ int main(int argc, char* argv[]) {
       size_t box = HASH(label);
 
       auto lens = find_if(
-          boxes[box].begin(), boxes[box].end(),
-          [label](const pair<string, int>& x) { return x.first == label; });
+        boxes[box].begin(), boxes[box].end(),
+        [label](const pair<string, int>& x) { return x.first == label; });
 
       if (lens != boxes[box].end()) {
         size_t idx = distance(boxes[box].begin(), lens);
@@ -100,8 +102,8 @@ int main(int argc, char* argv[]) {
       int focal_len = stoi(part.substr(valueIndex + 1));
 
       auto lens = find_if(
-          boxes[box].begin(), boxes[box].end(),
-          [label](const pair<string, int>& x) { return x.first == label; });
+        boxes[box].begin(), boxes[box].end(),
+        [label](const pair<string, int>& x) { return x.first == label; });
 
       if (lens != boxes[box].end()) {
         size_t idx = distance(boxes[box].begin(), lens);

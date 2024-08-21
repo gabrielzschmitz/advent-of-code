@@ -33,11 +33,11 @@
  * @author [gabrielzschmitz]
  * @date [04/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <cstring>
+#include <fstream>
+#include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 struct Cards {
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
     Cards game;
     string cardString;
     iss >> cardString >> game.card >>
-        cardString;  // Extracting the "Card" and card number
+      cardString;  // Extracting the "Card" and card number
     for (int i = 0; i < 10; i++) {
       iss >> game.winning_cards[i];
     }
@@ -93,9 +93,7 @@ int score_cards(const vector<Cards>& games) {
     vector<int> wins = {};
     for (int win : i.winning_cards) {
       for (int my : i.my_cards) {
-        if (my == win) {
-          wins.push_back(my);
-        }
+        if (my == win) { wins.push_back(my); }
       }
     }
 
@@ -103,10 +101,8 @@ int score_cards(const vector<Cards>& games) {
     int round = 0;
     int found = 1;
     for (int i = 0; i < N; i++) {
-      if (i == 0)
-        round += 1;
-      else if (i == N - 1)
-        round += 1;
+      if (i == 0) round += 1;
+      else if (i == N - 1) round += 1;
       else {
         found = found * 2;
         round += found;

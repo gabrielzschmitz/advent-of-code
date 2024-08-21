@@ -26,12 +26,12 @@
  * @author [gabrielzschmitz]
  * @date [22/12/2023]
  */
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 using namespace std;
 bool debug = false;
 

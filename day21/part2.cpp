@@ -32,16 +32,15 @@
  * @author [gabrielzschmitz]
  * @date [21/12/2023]
  */
-#include <unordered_set>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdint>
 #include <cassert>
-#include <vector>
-#include <deque>
-#include <tuple>
 #include <cmath>
+#include <cstdint>
+#include <deque>
+#include <fstream>
+#include <iostream>
+#include <tuple>
+#include <unordered_set>
+#include <vector>
 using namespace std;
 namespace std {
 template <>
@@ -61,7 +60,7 @@ uint64_t fillPlots(vector<string> gardenMap, uint64_t startRow,
   unordered_set<tuple<uint64_t, uint64_t>> stepsCounter;
   unordered_set<tuple<uint64_t, uint64_t>> seen = {{startRow, startColumn}};
   deque<tuple<uint64_t, uint64_t, uint64_t>> queue = {
-      {startRow, startColumn, amountSteps}};
+    {startRow, startColumn, amountSteps}};
 
   while (!queue.empty()) {
     auto front = queue.front();
@@ -70,12 +69,8 @@ uint64_t fillPlots(vector<string> gardenMap, uint64_t startRow,
     uint64_t steps = get<2>(front);
     queue.pop_front();
 
-    if (steps % 2 == 0) {
-      stepsCounter.insert({row, column});
-    }
-    if (steps == 0) {
-      continue;
-    }
+    if (steps % 2 == 0) { stepsCounter.insert({row, column}); }
+    if (steps == 0) { continue; }
 
     for (const auto& directionPair :
          vector<pair<uint64_t, uint64_t>>{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}) {
@@ -134,10 +129,11 @@ int main(int argc, char* argv[]) {
 
   string line;
   vector<string> gardenMap;
-  while (getline(input_file, line)) gardenMap.push_back(line);
+  while (getline(input_file, line))
+    gardenMap.push_back(line);
 
   pair<uint64_t, uint64_t> startingCordinates =
-      findStartingCoordinates(gardenMap);
+    findStartingCoordinates(gardenMap);
   if (debug)
     cout << "Start: " << startingCordinates.first << ", "
          << startingCordinates.second << "\n\n";
@@ -160,23 +156,23 @@ int main(int argc, char* argv[]) {
                                    startingCordinates.second, mapSize * 2);
 
   uint64_t corner_t =
-      fillPlots(gardenMap, mapSize - 1, startingCordinates.second, mapSize - 1);
+    fillPlots(gardenMap, mapSize - 1, startingCordinates.second, mapSize - 1);
   uint64_t corner_r =
-      fillPlots(gardenMap, startingCordinates.first, 0, mapSize - 1);
+    fillPlots(gardenMap, startingCordinates.first, 0, mapSize - 1);
   uint64_t corner_b =
-      fillPlots(gardenMap, 0, startingCordinates.second, mapSize - 1);
+    fillPlots(gardenMap, 0, startingCordinates.second, mapSize - 1);
   uint64_t corner_l =
-      fillPlots(gardenMap, startingCordinates.first, mapSize - 1, mapSize - 1);
+    fillPlots(gardenMap, startingCordinates.first, mapSize - 1, mapSize - 1);
 
   uint64_t small_tr = fillPlots(gardenMap, mapSize - 1, 0, mapSize / 2 - 1);
   uint64_t small_tl =
-      fillPlots(gardenMap, mapSize - 1, mapSize - 1, mapSize / 2 - 1);
+    fillPlots(gardenMap, mapSize - 1, mapSize - 1, mapSize / 2 - 1);
   uint64_t small_br = fillPlots(gardenMap, 0, 0, mapSize / 2 - 1);
   uint64_t small_bl = fillPlots(gardenMap, 0, mapSize - 1, mapSize / 2 - 1);
 
   uint64_t large_tr = fillPlots(gardenMap, mapSize - 1, 0, mapSize * 3 / 2 - 1);
   uint64_t large_tl =
-      fillPlots(gardenMap, mapSize - 1, mapSize - 1, mapSize * 3 / 2 - 1);
+    fillPlots(gardenMap, mapSize - 1, mapSize - 1, mapSize * 3 / 2 - 1);
   uint64_t large_br = fillPlots(gardenMap, 0, 0, mapSize * 3 / 2 - 1);
   uint64_t large_bl = fillPlots(gardenMap, 0, mapSize - 1, mapSize * 3 / 2 - 1);
 

@@ -40,11 +40,11 @@
  * @author [gabrielzschmitz]
  * @date [09/12/2023]
  */
-#include <iostream>
-#include <fstream>
 #include <cstdint>
-#include <vector>
+#include <fstream>
+#include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 void printVector(const vector<int>& vec, const string& name) {
@@ -65,9 +65,7 @@ vector<int> differenceVector(const vector<int> vec) {
 
 bool allZeros(const std::vector<int>& vec) {
   for (const int& num : vec) {
-    if (num != 0) {
-      return false;
-    }
+    if (num != 0) { return false; }
   }
   return true;
 }
