@@ -30,11 +30,7 @@
  * input.
  */
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <algorithm>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
 #include <fstream>
 #include <iostream>
 
