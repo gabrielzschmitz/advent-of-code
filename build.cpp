@@ -8,13 +8,13 @@
  * input or test file if the appropriate flag is set.
  * 
  * @details
- * Usage: ./build <year> <day> <part> [<input|test>] [--run]
+ * Usage: ./build <year> <day> <part> [<input|test>] [<run>]
  * 
  * - <year>: A 4-digit number specifying the year (e.g., 2023).
  * - <day>: A 2-digit number specifying the day (e.g., 24).
  * - <part>: The part number, either 1 or 2.
  * - <input|test>: Optional file type, "input" or "test". Defaults to "input".
- * - [--run]: Optional flag to run the compiled executable. If provided, 
+ * - <run>: Optional flag to run the compiled executable. If provided, 
  *   the executable will be executed with the specified input or test file.
  * 
  * The program performs input validation, creates necessary directories,
@@ -24,7 +24,7 @@
  * g++ -std=c++11 -o build build.cpp
  * 
  * @example
- * ./build_run 2023 24 1 test --run
+ * ./build_run 2023 24 1 test run
  * This command compiles the source file `2023/day24/part1.cpp`, places the
  * executable in `2023/day24/build/part1`, and runs it with `2023/day24/test` as
  * input.
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
   // Check for correct number of arguments
   if (argc < 4 || argc > 6) {
     std::cerr << "Usage: " << argv[0]
-              << " <year> <day> <part> [<input|test>] [--run]" << std::endl;
+              << " <year> <day> <part> [<input|test>] [run]" << std::endl;
     return 1;
   }
 
@@ -65,13 +65,13 @@ int main(int argc, char* argv[]) {
 
   // Check for optional arguments
   if (argc >= 5) {
-    if (std::string(argv[4]) == "--run") {
+    if (std::string(argv[4]) == "run") {
       run = true;
     } else {
       file_type = argv[4];
     }
   }
-  if (argc == 6 && std::string(argv[5]) == "--run") { run = true; }
+  if (argc == 6 && std::string(argv[5]) == "run") { run = true; }
 
   // Validate inputs
   if (year.size() != 4 || !std::all_of(year.begin(), year.end(), ::isdigit)) {
