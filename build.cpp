@@ -31,10 +31,10 @@
  */
 #include <sys/stat.h>
 #include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 
-// Function to check if a directory exists and create it if it does not
 bool createDirectory(const std::string& path) {
   struct stat info;
   if (stat(path.c_str(), &info) != 0) {
@@ -50,30 +50,60 @@ bool createDirectory(const std::string& path) {
 }
 
 int main(int argc, char* argv[]) {
-  // Check for correct number of arguments
   if (argc < 4 || argc > 6) {
     std::cerr << "Usage: " << argv[0]
+              << " <year> <day> <part> [<input|test>] [<run>]" << std::endl;
+    return 1;
+  }
+
+  std::string year, day, part, file_type = "input";
+  bool run = false;
+
+  bool year_set = false, day_set = false, part_set = false;
+
+  for (int i = 1; i < argc; ++i) {
+    std::string arg = argv[i];
+
+    if (!year_set && arg.size() == 4 &&
+        std::all_of(arg.begin(), arg.end(), ::isdigit)) {
+      year = arg;
+      year_set = true;
+      continue;
+    }
+
+    if (!day_set && arg.size() == 2 &&
+        std::all_of(arg.begin(), arg.end(), ::isdigit)) {
+      day = arg;
+      day_set = true;
+      continue;
+    }
+
+    if (!part_set && (arg == "1" || arg == "2")) {
+      part = arg;
+      part_set = true;
+      continue;
+    }
+
+    if (arg == "input" || arg == "test") {
+      file_type = arg;
+      continue;
+    }
+
+    if (arg == "run") {
+      run = true;
+      continue;
+    }
+
+    std::cerr << "Unknown argument: " << arg << std::endl;
+    return 1;
+  }
+
+  if (!year_set || !day_set || !part_set) {
+    std::cerr << "Error: Missing required arguments. Usage: " << argv[0]
               << " <year> <day> <part> [<input|test>] [run]" << std::endl;
     return 1;
   }
 
-  std::string year = argv[1];
-  std::string day = argv[2];
-  std::string part = argv[3];
-  std::string file_type = "input";
-  bool run = false;
-
-  // Check for optional arguments
-  if (argc >= 5) {
-    if (std::string(argv[4]) == "run") {
-      run = true;
-    } else {
-      file_type = argv[4];
-    }
-  }
-  if (argc == 6 && std::string(argv[5]) == "run") { run = true; }
-
-  // Validate inputs
   if (year.size() != 4 || !std::all_of(year.begin(), year.end(), ::isdigit)) {
     std::cerr << "Invalid year. Must be a 4-digit number." << std::endl;
     return 1;
@@ -94,23 +124,25 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  // Set directories and files
   std::string day_dir = year + "/day" + day;
   std::string build_dir = day_dir + "/build";
   std::string source_file = day_dir + "/part" + part + ".cpp";
   std::string output_file = build_dir + "/part" + part;
 
-  // Create build directory if it does not exist
   if (!createDirectory(build_dir)) { return 1; }
 
-  // Compile the source file
+  std::ifstream src_file(source_file);
+  if (!src_file.good()) {
+    std::cerr << "Source file not found: " << source_file << std::endl;
+    return 1;
+  }
+
   std::string compile_command = "g++ " + source_file + " -o " + output_file;
   if (system(compile_command.c_str()) != 0) {
     std::cerr << "Build failed." << std::endl;
     return 1;
   }
 
-  // Run the application with the specified input or test file, if run flag is set
   if (run) {
     std::string input_file = day_dir + "/" + file_type;
     std::ifstream file(input_file);
