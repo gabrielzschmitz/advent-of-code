@@ -36,8 +36,10 @@ prompts.
 
 ## 2023
 
-![2023 Advent of Code Calendar](./img/2023-calendar.png) ![2023
-Leaderboard](./img/2023-leaderboard.png)
+<p align="center">
+    <img src="./img/2023-calendar.png" alt="2023 Advent of Code Calendar" width="400px">
+    <img src="./img/2023-leaderboard.png" alt="2023 Leaderboard" width="400px">
+</p>
 
 This directory contains my solutions for the 2023 Advent of Code. Each day's
 directory has the input files, C++ code for both parts of the puzzles, and the
