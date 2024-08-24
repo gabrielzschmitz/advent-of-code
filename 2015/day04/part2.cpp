@@ -44,8 +44,9 @@ void checkDebugFlag(const std::string& input, bool& debug) {
   if (last_part == "test") debug = true;
 }
 
-// Leftrotate function definition
-#define LEFTROTATE(x, c) (((x) << (c)) | ((x) >> (32 - (c))))
+uint32_t leftRotate(uint32_t x, uint32_t c) {
+  return (x << c) | (x >> (32 - c));
+}
 
 std::string md5(const std::string& input) {
   // s specifies the per-round shift amounts
@@ -136,7 +137,7 @@ std::string md5(const std::string& input) {
       A = D;
       D = C;
       C = B;
-      B = B + LEFTROTATE(F, s[i]);
+      B = B + leftRotate(F, s[i]);
     }
 
     // Add this chunk's hash to result so far:

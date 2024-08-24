@@ -48,7 +48,6 @@ void checkDebugFlag(const std::string& input, bool& debug) {
   if (last_part == "test") debug = true;
 }
 
-// Leftrotate function definition
 uint32_t leftRotate(uint32_t x, uint32_t c) {
   return (x << c) | (x >> (32 - c));
 }
