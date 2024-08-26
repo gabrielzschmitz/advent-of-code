@@ -1,3 +1,32 @@
+/**
+ * @file part1.cpp
+ * @brief Naughty or Nice String Classifier
+ *
+ * This program helps Santa determine which strings in his text file are
+ * "naughty" or "nice" based on a set of rules. A "nice" string must satisfy all
+ * of the following conditions:
+ * - It contains at least three vowels (aeiou).
+ * - It has at least one letter that appears twice in a row.
+ * - It does not contain the substrings "ab", "cd", "pq", or "xy".
+ *
+ * The program processes each string to check if it meets the criteria for being
+ * classified as "nice" and counts how many strings in the input are "nice".
+ *
+ * Example Input:
+ * - "ugknbfddgicrmopn" // Nice (three vowels, double letter "dd", no disallowed
+ *   substrings)
+ * - "aaa"              // Nice (three vowels, double letter "aa")
+ * - "jchzalrnumimnmhp" // Naughty (no double letter)
+ * - "haegwjzuvuyypxyu" // Naughty (contains disallowed substring "xy")
+ * - "dvszwmarrgswjxmb" // Naughty (only one vowel)
+ *
+ * The program outputs the number of "nice" strings found in the input.
+ *
+ * Puzzle Answer: [Number of Nice Strings]
+ *
+ * @author [gabrielzschmitz]
+ * @date [25/08/2024]
+ */
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -16,26 +45,22 @@ void checkDebugFlag(const std::string& input, bool& debug) {
 
 bool checkThreeVowels(const std::string& str) {
   int vowel_count = 0;
-  for (char ch : str) {
-    if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+  for (char ch : str)
+    if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
       vowel_count++;
-    }
-  }
   return vowel_count >= 3;
 }
 
 bool checkDoubleLetter(const std::string& str) {
-  for (size_t i = 0; i < str.size() - 1; ++i) {
+  for (size_t i = 0; i < str.size() - 1; ++i)
     if (str[i] == str[i + 1]) return true;
-  }
   return false;
 }
 
 bool checkBadStrings(const std::string& str) {
   std::vector<std::string> bad_strings = {"ab", "cd", "pq", "xy"};
-  for (const auto& bad : bad_strings) {
+  for (const auto& bad : bad_strings)
     if (str.find(bad) != std::string::npos) return false;
-  }
   return true;
 }
 
@@ -60,11 +85,10 @@ int main(int argc, char* argv[]) {
     else ++nice;
   }
 
-  std::cout << "Part 2: " << nice << std::endl;
+  if (debug)
+    std::cout << "total nice: " << nice << ", total bad: " << bad << std::endl;
 
-  if (debug) {
-    std::cout << "Total Nice: " << nice << ", Total Bad: " << bad << std::endl;
-  }
+  std::cout << "ANSWER: " << nice << std::endl;
 
   return 0;
 }
