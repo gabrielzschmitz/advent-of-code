@@ -1,0 +1,4 @@
+inc a
+tpl a
+jie a, +2
+inc b
