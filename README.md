@@ -30,6 +30,10 @@ To compile and run the solutions, follow these steps:
 
 ## 2015
 
+<p align="center">
+    <img src="./img/2015-calendar.png" alt="2015 Advent of Code Calendar" width="400px">
+</p>
+
 This directory contains my solutions for the 2015 Advent of Code. It includes
 input files, C++ code for both parts of each day's puzzle, and the original
 prompts.
