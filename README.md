@@ -32,6 +32,7 @@ To compile and run the solutions, follow these steps:
 
 <p align="center">
     <img src="./img/2015-calendar.png" alt="2015 Advent of Code Calendar" width="400px">
+    <img src="./img/2015-leaderboard.png" alt="2015 Leaderboard" width="400px">
 </p>
 
 This directory contains my solutions for the 2015 Advent of Code. It includes
