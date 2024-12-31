@@ -24,7 +24,7 @@
  * g++ -std=c++11 -o build build.cpp
  * 
  * @example
- * ./build_run 2023 24 1 test run
+ * ./build 2023 24 1 test run
  * This command compiles the source file `2023/day24/part1.cpp`, places the
  * executable in `2023/day24/build/part1`, and runs it with `2023/day24/test` as
  * input.
