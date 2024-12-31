@@ -28,6 +28,28 @@ To compile and run the solutions, follow these steps:
  - `<run>`: Optional flag to run the compiled executable. If provided, 
    the executable will be executed with the specified input or test file.
 
+## Benchmarking Tool
+
+To benchmark solutions and analyze performance:
+
+1. Build the `benchmark.cpp` file:
+
+    ```shell
+    $ g++ -std=c++11 -o benchmark benchmark.cpp
+    ```
+
+2. Run the benchmarking tool:
+
+    ```shell
+    $ ./benchmark <year> <day> <part> [<input|test>] [<runs>]
+    ```
+
+ - `<year>`: A 4-digit number specifying the year (e.g., 2023).
+ - `<day>`: A 2-digit number specifying the day (e.g., 24).
+ - `<part>`: The part number, either 1 or 2.
+ - `<input|test>`: Optional file type, "input" or "test". Defaults to "input".
+ - `<runs>`: Optional number of runs. Defaults to 1000.
+
 ## 2015
 
 <p align="center">
