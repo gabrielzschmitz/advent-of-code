@@ -49,8 +49,24 @@ int main(int argc, char* argv[]) {
   std::string year = argv[1];
   std::string day = argv[2];
   std::string part = argv[3];
-  std::string file_type = (argc >= 5) ? argv[4] : "input";
-  int runs = (argc == 6) ? std::stoi(argv[5]) : 1000;
+  std::string file_type = "input";
+  int runs = 1000;
+
+  for (int i = 4; i < argc; ++i) {
+    std::string arg = argv[i];
+    if (arg == "input" || arg == "test") file_type = arg;
+    else {
+      try {
+        runs = std::stoi(arg);
+        if (runs <= 0) throw std::invalid_argument("Non-positive runs");
+      } catch (const std::invalid_argument&) {
+        std::cerr << "Invalid argument: " << arg
+                  << ". Must be 'input', 'test', or a positive integer."
+                  << std::endl;
+        return 1;
+      }
+    }
+  }
 
   if (year.size() != 4 || !std::all_of(year.begin(), year.end(), ::isdigit)) {
     std::cerr << "Invalid year. Must be a 4-digit number." << std::endl;
@@ -101,7 +117,9 @@ int main(int argc, char* argv[]) {
   std::ostringstream run_command;
   run_command << executable << " " << input_file << " > /dev/null 2>&1";
 
-  std::cout << "Benchmarking: " << run_command.str() << "\n" << std::endl;
+  std::cout << "Benchmarking (" << runs << "x)" << " : $" << run_command.str()
+            << "\n"
+            << std::endl;
   std::vector<double> durations;
 
   for (int i = 0; i < runs; ++i) {
@@ -123,10 +141,8 @@ int main(int argc, char* argv[]) {
                          ? (durations[runs / 2 - 1] + durations[runs / 2]) / 2.0
                          : durations[runs / 2];
 
-  std::cout << "Total execution time (for " << runs << " runs): " << total_time
-            << " ms" << std::endl;
-  std::cout << "Execution time (average over " << runs
-            << " runs): " << average_time << " ms" << std::endl;
+  std::cout << "Total execution time: " << total_time << " ms" << std::endl;
+  std::cout << "Avarage execution time: " << average_time << " ms" << std::endl;
   std::cout << "Median execution time: " << median_time << " ms" << std::endl;
 
   return 0;
