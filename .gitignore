@@ -30,9 +30,15 @@
 *.exe
 *.out
 *.app
-aoc
-build
-benchmark
+# Ignore executables named aoc, build, benchmark (as files)
+/aoc/aoc
+/build/build
+/benchmark/benchmark
+
+# But allow folders with those names
+!/aoc/
+!/build/
+!/benchmark/
 part1
 part2
 
