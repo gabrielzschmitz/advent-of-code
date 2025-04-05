@@ -29,11 +29,15 @@
  * executable in `2023/day24/build/part1`, and runs it with `2023/day24/test` as
  * input.
  */
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 bool createDirectory(const std::string& path) {
   struct stat info;
@@ -143,6 +147,11 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  std::stringstream args_stream;
+  args_stream << year << " " << day << " " << part;
+  std::string aoc_args = args_stream.str();
+
+  std::string run_output;
   if (run) {
     std::string input_file = day_dir + "/" + file_type;
     std::ifstream file(input_file);
@@ -153,11 +162,19 @@ int main(int argc, char* argv[]) {
     }
 
     std::string run_command = output_file + " " + input_file;
-    if (system(run_command.c_str()) != 0) {
+    FILE* pipe = popen(run_command.c_str(), "r");
+    if (!pipe) {
       std::cerr << "Error running the application." << std::endl;
       return 1;
     }
+
+    char buffer[128];
+    while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
+      run_output += buffer;
+    }
+    pclose(pipe);
   }
+  std::ofstream("aoc_args.tmp") << aoc_args << "\n" << run_output;
 
   return 0;
 }
