@@ -1,3 +1,46 @@
+/**
+ * @brief A utility tool for interacting with Advent of Code.
+ * 
+ * This command-line utility allows you to automate common Advent of Code
+ * operations such as downloading your puzzle input, fetching the problem
+ * description, and submitting your answer directly from the terminal.
+ * 
+ * @details
+ * Usage:
+ *   ./aoc input      - Downloads puzzle input using session cookie.
+ *   ./aoc prompt     - Fetches and converts the puzzle prompt to Markdown.
+ *   ./aoc submit     - Submits the answer for a given problem part.
+ * 
+ * Prerequisites:
+ * - You must have a valid Advent of Code session cookie saved in:
+ *     ./aoc/aoc.session
+ * - You must create an arguments file in the format:
+ *     ./aoc/aoc_args.tmp
+ *     Format:
+ *       year day part
+ *       ANSWER: your_answer
+ * 
+ * The program will:
+ * - Read your session token from the session file.
+ * - Use the arguments file to determine which year/day/part to operate on.
+ * - Use `curl` to interact with Advent of Code endpoints.
+ * - Use `html2text` or `pandoc` to convert HTML prompts into Markdown files.
+ * 
+ * To compile this tool:
+ *   g++ -std=c++17 -lcurl -o aoc aoc.cpp
+ * 
+ * @example
+ * ./aoc input
+ *   Downloads input for the specified year and day and saves it to:
+ *     ./<year>/day<DD>/input
+ * 
+ * ./aoc prompt
+ *   Fetches the puzzle description and saves it as Markdown to:
+ *     ./<year>/day<DD>/prompt.md
+ * 
+ * ./aoc submit
+ *   Submits your answer for the given year/day/part using your session cookie.
+ */
 #include <curl/curl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
