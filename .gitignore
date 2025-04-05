@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+aoc
 build
 benchmark
 part1
@@ -37,3 +38,4 @@ part2
 
 # Keys
 *.session
+*.tmp
