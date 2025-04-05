@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
     }
     pclose(pipe);
   }
-  std::ofstream("aoc_args.tmp") << aoc_args << "\n" << run_output;
+  std::ofstream("./aoc/aoc_args.tmp") << aoc_args << "\n" << run_output;
 
   return 0;
 }

@@ -14,8 +14,8 @@
 #include <string>
 
 const std::string BASE_URL = "https://adventofcode.com";
-const std::string SESSION_FILE = "./aoc.session";
-const std::string ARGS_FILE = "./aoc_args.tmp";
+const std::string SESSION_FILE = "./aoc/aoc.session";
+const std::string ARGS_FILE = "./aoc/aoc_args.tmp";
 std::string AOC_SESSION;
 
 // ANSI color codes
@@ -256,7 +256,7 @@ int main(int argc, char* argv[]) {
   }
   std::string command = argv[1];
 
-  std::ifstream in("aoc_args.tmp");
+  std::ifstream in(ARGS_FILE);
   std::string year, part;
   int day_int;
 
