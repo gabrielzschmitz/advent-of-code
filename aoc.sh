@@ -17,19 +17,16 @@ function usage() {
 
 # Build tool
 function build_tool() {
-  echo "Compiling build.cpp..."
   g++ -std=c++11 -o build/build build/build.cpp
 }
 
 # Benchmark tool
 function build_benchmark() {
-  echo "Compiling benchmark.cpp..."
   g++ -std=c++11 -o benchmark/benchmark benchmark/benchmark.cpp
 }
 
 # AoC tool
 function build_aoc() {
-  echo "Compiling aoc.cpp..."
   g++ -std=c++11 -lcurl -o aoc/aoc aoc/aoc.cpp
 }
 
@@ -55,11 +52,9 @@ function run_aoc() {
 
   # If the user provided year/day/part (and optionally input/test/run)
   if [[ $# -ge 3 ]]; then
-    echo "Building solution to prepare aoc_args.tmp..."
-    ./build/build "$@"
+    ./build/build "$@" > /dev/null
   fi
 
-  echo "Running aoc tool with action: $action"
   ./aoc/aoc "$action"
 }
 
