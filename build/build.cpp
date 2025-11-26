@@ -1,45 +1,44 @@
 /**
  * @brief A build tool for the Advent of Code challenge.
- * 
+ *
  * This utility program is designed to build and optionally run a C++ source
  * file specific to the Advent of Code challenge. It compiles the source file
  * located in a directory structure based on the provided year, day, and part.
  * The program also optionally executes the resulting binary with a specified
  * input or test file if the appropriate flag is set.
- * 
+ *
  * @details
  * Usage: ./build <year> <day> <part> [<input|test>] [<run>]
- * 
+ *
  * - <year>: A 4-digit number specifying the year (e.g., 2023).
  * - <day>: A 2-digit number specifying the day (e.g., 24).
  * - <part>: The part number, either 1 or 2.
  * - <input|test>: Optional file type, "input" or "test". Defaults to "input".
- * - <run>: Optional flag to run the compiled executable. If provided, 
+ * - <run>: Optional flag to run the compiled executable. If provided,
  *   the executable will be executed with the specified input or test file.
- * 
+ *
  * The program performs input validation, creates necessary directories,
  * compiles the source file using g++, and optionally runs the resulting
  * executable. To compile this build tool itself, use the following command:
- * 
+ *
  * g++ -std=c++11 -o build build.cpp
- * 
+ *
  * @example
  * ./build 2023 24 1 test run
  * This command compiles the source file `2023/day24/part1.cpp`, places the
  * executable in `2023/day24/build/part1`, and runs it with `2023/day24/test` as
  * input.
  */
-#include <stdlib.h>
-#include <sys/stat.h>
 #include <algorithm>
 #include <cstdlib>
-#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <stdlib.h>
 #include <string>
+#include <sys/stat.h>
 
-bool createDirectory(const std::string& path) {
+bool createDirectory(const std::string &path) {
   struct stat info;
   if (stat(path.c_str(), &info) != 0) {
     if (mkdir(path.c_str(), 0755) != 0) {
@@ -53,7 +52,7 @@ bool createDirectory(const std::string& path) {
   return true;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   if (argc < 4 || argc > 6) {
     std::cerr << "Usage: " << argv[0]
               << " <year> <day> <part> [<input|test>] [<run>]" << std::endl;
@@ -133,7 +132,9 @@ int main(int argc, char* argv[]) {
   std::string source_file = day_dir + "/part" + part + ".cpp";
   std::string output_file = build_dir + "/part" + part;
 
-  if (!createDirectory(build_dir)) { return 1; }
+  if (!createDirectory(build_dir)) {
+    return 1;
+  }
 
   std::ifstream src_file(source_file);
   if (!src_file.good()) {
@@ -141,7 +142,8 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  std::string compile_command = "g++ " + source_file + " -o " + output_file;
+  std::string compile_command =
+      "g++ " + source_file + " -lcrypto -o " + output_file;
   if (system(compile_command.c_str()) != 0) {
     std::cerr << "Build failed." << std::endl;
     return 1;
@@ -162,7 +164,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::string run_command = output_file + " " + input_file;
-    FILE* pipe = popen(run_command.c_str(), "r");
+    FILE *pipe = popen(run_command.c_str(), "r");
     if (!pipe) {
       std::cerr << "Error running the application." << std::endl;
       return 1;
