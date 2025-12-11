@@ -20,7 +20,17 @@ For example:
 
     
     
-    aaa: you hhh you: bbb ccc bbb: ddd eee ccc: ddd eee fff ddd: ggg eee: out fff: out ggg: out hhh: ccc fff iii iii: out 
+    aaa: you hhh
+    you: bbb ccc
+    bbb: ddd eee
+    ccc: ddd eee fff
+    ddd: ggg
+    eee: out
+    fff: out
+    ggg: out
+    hhh: ccc fff iii
+    iii: out
+    
 
 Each line gives the name of a device followed by a list of the devices to
 which its outputs are attached. So, `bbb: ddd eee` means that device `bbb` has
@@ -51,4 +61,54 @@ In this example, these are all of the paths from `you` to `out`:
 In total, there are `_5_` different paths leading from `you` to `out`.
 
 _How many different paths lead from`you` to `out`?_
+
+## \--- Part Two ---
+
+Thanks in part to your analysis, the Elves have figured out a little bit about
+the issue. They now know that the problematic data path passes through both
+`dac` (a [digital-to-analog converter](https://en.wikipedia.org/wiki/Digital-
+to-analog_converter)) and `fft` (a device which performs a [fast Fourier
+transform](https://en.wikipedia.org/wiki/Fast_Fourier_transform)).
+
+They're still not sure which specific path is the problem, and so they now
+need you to find every path from `svr` (the server rack) to `out`. However,
+the paths you find must all also visit both `dac` _and_ `fft` (in any order).
+
+For example:
+
+    
+    
+    svr: aaa bbb
+    aaa: fft
+    fft: ccc
+    bbb: tty
+    tty: ccc
+    ccc: ddd eee
+    ddd: hub
+    hub: fff
+    eee: dac
+    dac: fff
+    fff: ggg hhh
+    ggg: out
+    hhh: out
+    
+
+This new list of devices contains many paths from `svr` to `out`:
+
+    
+    
+    svr,aaa,_fft_ ,ccc,ddd,hub,fff,ggg,out
+    svr,aaa,_fft_ ,ccc,ddd,hub,fff,hhh,out
+    svr,aaa,_fft_ ,ccc,eee,_dac_ ,fff,ggg,out
+    svr,aaa,_fft_ ,ccc,eee,_dac_ ,fff,hhh,out
+    svr,bbb,tty,ccc,ddd,hub,fff,ggg,out
+    svr,bbb,tty,ccc,ddd,hub,fff,hhh,out
+    svr,bbb,tty,ccc,eee,_dac_ ,fff,ggg,out
+    svr,bbb,tty,ccc,eee,_dac_ ,fff,hhh,out
+    
+
+However, only _`2`_ paths from `svr` to `out` visit both `dac` and `fft`.
+
+Find all of the paths that lead from `svr` to `out`. _How many of those paths
+visit both`dac` and `fft`?_
 
