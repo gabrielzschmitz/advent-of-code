@@ -1,16 +1,16 @@
 /**
  * @brief A utility tool for interacting with Advent of Code.
- * 
+ *
  * This command-line utility allows you to automate common Advent of Code
  * operations such as downloading your puzzle input, fetching the problem
  * description, and submitting your answer directly from the terminal.
- * 
+ *
  * @details
  * Usage:
  *   ./aoc input      - Downloads puzzle input using session cookie.
  *   ./aoc prompt     - Fetches and converts the puzzle prompt to Markdown.
  *   ./aoc submit     - Submits the answer for a given problem part.
- * 
+ *
  * Prerequisites:
  * - You must have a valid Advent of Code session cookie saved in:
  *     ./aoc/aoc.session
@@ -19,42 +19,42 @@
  *     Format:
  *       year day part
  *       ANSWER: your_answer
- * 
+ *
  * The program will:
  * - Read your session token from the session file.
  * - Use the arguments file to determine which year/day/part to operate on.
  * - Use `curl` to interact with Advent of Code endpoints.
  * - Use `html2text` or `pandoc` to convert HTML prompts into Markdown files.
- * 
+ *
  * To compile this tool:
  *   g++ -std=c++17 -lcurl -o aoc aoc.cpp
- * 
+ *
  * @example
  * ./aoc input
  *   Downloads input for the specified year and day and saves it to:
  *     ./<year>/day<DD>/input
- * 
+ *
  * ./aoc prompt
  *   Fetches the puzzle description and saves it as Markdown to:
  *     ./<year>/day<DD>/prompt.md
- * 
+ *
  * ./aoc submit
  *   Submits your answer for the given year/day/part using your session cookie.
  */
-#include <curl/curl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <curl/curl.h>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <regex>
 #include <sstream>
 #include <string>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 const std::string BASE_URL = "https://adventofcode.com";
 const std::string SESSION_FILE = "./aoc/aoc.session";
@@ -62,13 +62,13 @@ const std::string ARGS_FILE = "./aoc/aoc_args.tmp";
 std::string AOC_SESSION;
 
 // ANSI color codes
-constexpr const char* COLOR_RESET = "\033[0m";
-constexpr const char* COLOR_WHITE = "\033[1;37m";
-constexpr const char* COLOR_BLUE = "\033[1;34m";
-constexpr const char* COLOR_GREEN = "\033[1;32m";
-constexpr const char* COLOR_YELLOW = "\033[1;33m";
-constexpr const char* COLOR_RED = "\033[1;31m";
-constexpr const char* STYLE_BOLD = "\033[1m";
+constexpr const char *COLOR_RESET = "\033[0m";
+constexpr const char *COLOR_WHITE = "\033[1;37m";
+constexpr const char *COLOR_BLUE = "\033[1;34m";
+constexpr const char *COLOR_GREEN = "\033[1;32m";
+constexpr const char *COLOR_YELLOW = "\033[1;33m";
+constexpr const char *COLOR_RED = "\033[1;31m";
+constexpr const char *STYLE_BOLD = "\033[1m";
 
 std::string current_timestamp() {
   auto now = std::chrono::system_clock::now();
@@ -81,58 +81,58 @@ std::string current_timestamp() {
   return ss.str();
 }
 
-void log_info(const std::string& msg) {
+void log_info(const std::string &msg) {
   std::cout << current_timestamp() << " " << COLOR_BLUE << STYLE_BOLD
             << "[INFO]" << COLOR_RESET << " " << msg << std::endl;
 }
 
-void log_success(const std::string& msg) {
+void log_success(const std::string &msg) {
   std::cout << current_timestamp() << " " << COLOR_GREEN << STYLE_BOLD
             << "[SUCCESS]" << COLOR_RESET << " " << msg << std::endl;
 }
 
-void log_warn(const std::string& msg) {
+void log_warn(const std::string &msg) {
   std::cout << current_timestamp() << " " << COLOR_YELLOW << STYLE_BOLD
             << "[WARNING]" << COLOR_RESET << " " << msg << std::endl;
 }
 
-void log_error(const std::string& msg) {
+void log_error(const std::string &msg) {
   std::cerr << current_timestamp() << " " << COLOR_RED << STYLE_BOLD
             << "[ERROR]" << COLOR_RESET << " " << msg << std::endl;
 }
 
-bool file_exists(const std::string& filename) {
+bool file_exists(const std::string &filename) {
   std::ifstream f(filename);
   return f.good();
 }
 
-std::string read_file(const std::string& filename) {
+std::string read_file(const std::string &filename) {
   std::ifstream file(filename);
   std::stringstream buffer;
   buffer << file.rdbuf();
   return buffer.str();
 }
 
-size_t write_data(void* ptr, size_t size, size_t nmemb, void* userdata) {
-  std::ofstream* stream = static_cast<std::ofstream*>(userdata);
+size_t write_data(void *ptr, size_t size, size_t nmemb, void *userdata) {
+  std::ofstream *stream = static_cast<std::ofstream *>(userdata);
   size_t total_size = size * nmemb;
-  stream->write(static_cast<char*>(ptr), total_size);
+  stream->write(static_cast<char *>(ptr), total_size);
   return total_size;
 }
 
-std::string curl_get(const std::string& url) {
-  CURL* curl = curl_easy_init();
+std::string curl_get(const std::string &url) {
+  CURL *curl = curl_easy_init();
   std::stringstream response;
   if (curl) {
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     std::string cookie = "session=" + AOC_SESSION;
     curl_easy_setopt(curl, CURLOPT_COOKIE, cookie.c_str());
     curl_easy_setopt(
-      curl, CURLOPT_WRITEFUNCTION,
-      +[](void* contents, size_t size, size_t nmemb, void* userp) -> size_t {
-        ((std::stringstream*)userp)->write((char*)contents, size * nmemb);
-        return size * nmemb;
-      });
+        curl, CURLOPT_WRITEFUNCTION,
+        +[](void *contents, size_t size, size_t nmemb, void *userp) -> size_t {
+          ((std::stringstream *)userp)->write((char *)contents, size * nmemb);
+          return size * nmemb;
+        });
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl");
@@ -142,7 +142,7 @@ std::string curl_get(const std::string& url) {
   return response.str();
 }
 
-void get_input(const std::string& year, const std::string& day_str) {
+void get_input(const std::string &year, const std::string &day_str) {
   log_info("Fetching input for year " + year + ", day " + day_str);
 
   std::string padded_day = day_str.length() < 2 ? "0" + day_str : day_str;
@@ -151,7 +151,7 @@ void get_input(const std::string& year, const std::string& day_str) {
   std::string dir_path = "./" + year + "/day" + padded_day;
   std::string file_path = dir_path + "/input";
 
-  CURL* curl = curl_easy_init();
+  CURL *curl = curl_easy_init();
   std::ofstream out(file_path);
   if (curl && out) {
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -169,13 +169,13 @@ void get_input(const std::string& year, const std::string& day_str) {
   }
 }
 
-void submit_answer(const std::string& year, const std::string& day_str,
-                   const std::string& part, const std::string& answer) {
+void submit_answer(const std::string &year, const std::string &day_str,
+                   const std::string &part, const std::string &answer) {
   log_info("Submitting answer for year " + year + ", day " + day_str +
            ", part " + part);
   log_info("Answer: " + answer);
 
-  CURL* curl = curl_easy_init();
+  CURL *curl = curl_easy_init();
   std::stringstream response;
   if (curl) {
     std::string padded_day = day_str.length() < 2 ? "0" + day_str : day_str;
@@ -188,11 +188,11 @@ void submit_answer(const std::string& year, const std::string& day_str,
     curl_easy_setopt(curl, CURLOPT_COOKIE, cookie.c_str());
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields.c_str());
     curl_easy_setopt(
-      curl, CURLOPT_WRITEFUNCTION,
-      +[](void* contents, size_t size, size_t nmemb, void* userp) -> size_t {
-        ((std::stringstream*)userp)->write((char*)contents, size * nmemb);
-        return size * nmemb;
-      });
+        curl, CURLOPT_WRITEFUNCTION,
+        +[](void *contents, size_t size, size_t nmemb, void *userp) -> size_t {
+          ((std::stringstream *)userp)->write((char *)contents, size * nmemb);
+          return size * nmemb;
+        });
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl");
     curl_easy_perform(curl);
@@ -204,39 +204,46 @@ void submit_answer(const std::string& year, const std::string& day_str,
     std::string html = response.str();
     if (std::regex_search(html, match, article_regex)) {
       std::string message =
-        std::regex_replace(match[1].str(), std::regex("<[^>]*>"), "");
+          std::regex_replace(match[1].str(), std::regex("<[^>]*>"), "");
       if (message.find("That's the right answer") != std::string::npos)
         log_success(message);
       else if (message.find("That's not the right answer") != std::string::npos)
         log_error(message);
-      else { log_warn("Server response:\n" + message); }
+      else {
+        log_warn("Server response:\n" + message);
+      }
     } else {
       log_error("Failed to parse server response.");
     }
   }
 }
 
-void get_prompt(const std::string& year, const std::string& day_str) {
+void get_prompt(const std::string &year, const std::string &day_str) {
   log_info("Fetching prompt for year " + year + ", day " + day_str);
 
-  // Zero-pad if needed
   std::string padded_day = day_str.length() < 2 ? "0" + day_str : day_str;
 
   std::string url =
-    BASE_URL + "/" + year + "/day/" + std::to_string(std::stoi(day_str));
+      BASE_URL + "/" + year + "/day/" + std::to_string(std::stoi(day_str));
   std::string html = curl_get(url);
 
-  html = std::regex_replace(html, std::regex("\n"), " ");
-  std::regex article_regex("<article.*?>(.*?)</article>",
+  std::regex article_regex("<article.*?>([\\s\\S]*?)</article>",
                            std::regex::ECMAScript);
-  std::smatch match;
 
-  if (!std::regex_search(html, match, article_regex)) {
+  auto articles_begin =
+      std::sregex_iterator(html.begin(), html.end(), article_regex);
+  auto articles_end = std::sregex_iterator();
+
+  if (articles_begin == articles_end) {
     log_error("Failed to fetch prompt.");
     return;
   }
 
-  std::string article_html = "<article>" + match[1].str() + "</article>";
+  std::string combined_html;
+  for (std::sregex_iterator i = articles_begin; i != articles_end; ++i) {
+    std::smatch match = *i;
+    combined_html += "<article>" + match[1].str() + "</article>\n\n";
+  }
 
   std::string dir_path = "./" + year + "/day" + padded_day;
   std::string filename = dir_path + "/prompt.md";
@@ -244,9 +251,9 @@ void get_prompt(const std::string& year, const std::string& day_str) {
   // Try html2text
   if (system("command -v html2text > /dev/null") == 0) {
     std::string command = "html2text > \"" + filename + "\"";
-    FILE* pipe = popen(command.c_str(), "w");
+    FILE *pipe = popen(command.c_str(), "w");
     if (pipe) {
-      fwrite(article_html.c_str(), 1, article_html.size(), pipe);
+      fwrite(combined_html.c_str(), 1, combined_html.size(), pipe);
       pclose(pipe);
       log_success("Problem prompt saved to " + filename);
     }
@@ -254,9 +261,9 @@ void get_prompt(const std::string& year, const std::string& day_str) {
   // Try pandoc
   else if (system("command -v pandoc > /dev/null") == 0) {
     std::string command = "pandoc -f html -t markdown -o \"" + filename + "\"";
-    FILE* pipe = popen(command.c_str(), "w");
+    FILE *pipe = popen(command.c_str(), "w");
     if (pipe) {
-      fwrite(article_html.c_str(), 1, article_html.size(), pipe);
+      fwrite(combined_html.c_str(), 1, combined_html.size(), pipe);
       pclose(pipe);
       log_success("Problem prompt saved to " + filename);
     }
@@ -274,19 +281,19 @@ void show_help() {
             << "And './aoc_args.temp' contains the problem to submit.\n";
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   if (!file_exists(SESSION_FILE)) {
     log_error("Session file '" + SESSION_FILE + "' not found.");
-    std::cerr
-      << "   Please create this file with your Advent of Code session cookie:\n"
-      << "   echo 'your_cookie_here' > " << SESSION_FILE << "\n";
+    std::cerr << "   Please create this file with your Advent of Code session "
+                 "cookie:\n"
+              << "   echo 'your_cookie_here' > " << SESSION_FILE << "\n";
     return 1;
   }
   if (!file_exists(ARGS_FILE)) {
     log_error("Args file '" + ARGS_FILE + "' not found.");
     std::cerr
-      << "   Please create this file the Advent of Code you want to run:\n"
-      << "   echo 'year day part' > " << ARGS_FILE << "\n";
+        << "   Please create this file the Advent of Code you want to run:\n"
+        << "   echo 'year day part' > " << ARGS_FILE << "\n";
     return 1;
   }
 
