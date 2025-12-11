@@ -24,7 +24,27 @@ For example:
 
     
     
-    162,817,812 57,618,57 906,360,560 592,479,940 352,342,300 466,668,158 542,29,236 431,825,988 739,650,466 52,470,668 216,146,977 819,987,18 117,168,530 805,96,715 346,949,466 970,615,88 941,993,340 862,61,35 984,92,344 425,690,689 
+    162,817,812
+    57,618,57
+    906,360,560
+    592,479,940
+    352,342,300
+    466,668,158
+    542,29,236
+    431,825,988
+    739,650,466
+    52,470,668
+    216,146,977
+    819,987,18
+    117,168,530
+    805,96,715
+    346,949,466
+    970,615,88
+    941,993,340
+    862,61,35
+    984,92,344
+    425,690,689
+    
 
 This list describes the position of 20 junction boxes, one per line. Each
 position is given as `X,Y,Z` coordinates. So, the first junction box in the
@@ -69,4 +89,22 @@ the three largest circuits (5, 4, and one of the circuits of size 2) produces
 Your list contains many junction boxes; connect together the _1000_ pairs of
 junction boxes which are closest together. Afterward, _what do you get if you
 multiply together the sizes of the three largest circuits?_
+
+## \--- Part Two ---
+
+The Elves were right; they _definitely_ don't have enough extension cables.
+You'll need to keep connecting junction boxes together until they're all in
+_one large circuit_.
+
+Continuing the above example, the first connection which causes all of the
+junction boxes to form a single circuit is between the junction boxes at
+`216,146,977` and `117,168,530`. The Elves need to know how far those junction
+boxes are from the wall so they can pick the right extension cable;
+multiplying the X coordinates of those two junction boxes (`216` and `117`)
+produces `_25272_`.
+
+Continue connecting the closest unconnected pairs of junction boxes together
+until they're all in the same circuit. _What do you get if you multiply
+together the X coordinates of the last two junction boxes you need to
+connect?_
 
