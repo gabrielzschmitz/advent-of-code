@@ -1,8 +1,48 @@
 /**
  * @file part1.cpp
- * @brief Largest Red-Corner Rectangle
+ * @brief Minimal-Press Configuration of Factory Indicator Light Systems
  *
- * Puzzle Answer: [Largest Rectangle Area]
+ * Inside the North Pole factory, each machine must be initialized by
+ * configuring its indicator lights to match a target pattern. The
+ * initialization procedure has been lost, but the remaining manual pages
+ * provide:
+ *
+ *   - An indicator light diagram: the required final on/off state for each
+ * light.
+ *   - A list of button wiring schematics: each button toggles specific lights.
+ *   - A joltage requirement list: irrelevant to initialization and ignored.
+ *
+ * Each machine:
+ *   - Begins with all indicator lights in the OFF state.
+ *   - Defines a desired final pattern using '.' (off) and '#' (on).
+ *   - Provides one or more buttons, each toggling a subset of lights indexed
+ *     from 0 to N-1.
+ *
+ * Pressing a button toggles every listed light (ON→OFF, OFF→ON). Buttons may be
+ * pressed any non-negative integer number of times, and pressing a button twice
+ * is equivalent to pressing it zero times (because toggling twice restores the
+ * original state). As a result, each button is effectively a binary decision:
+ *
+ *        press it (1) or do not press it (0).
+ *
+ * The problem for each machine is therefore equivalent to solving a system of
+ * linear equations over GF(2), where:
+ *
+ *   - Each button defines a vector of toggles.
+ *   - The target pattern defines the required parity of toggles for each light.
+ *
+ * Objective:
+ *   For each machine, determine the *minimum total number of button presses*
+ *   required to reach the target light configuration.
+ *
+ * Example Summary:
+ *   - Machine 1 requires a minimum of 2 presses.
+ *   - Machine 2 requires a minimum of 3 presses.
+ *   - Machine 3 requires a minimum of 2 presses.
+ *
+ * Summing across all machines gives the final answer for the puzzle.
+ *
+ * Puzzle Answer: [Total Minimum Button Press Count]
  *
  * @author [gabrielzschmitz]
  * @date [10/12/2025]
@@ -46,9 +86,6 @@ int main(int argc, char *argv[]) {
     if (line.empty())
       continue;
 
-    // -------------------------------
-    // PARSE INDICATOR LIGHT PATTERN
-    // -------------------------------
     size_t l = line.find('[');
     size_t r = line.find(']');
     std::string pattern = line.substr(l + 1, r - l - 1);
@@ -60,9 +97,6 @@ int main(int argc, char *argv[]) {
         target |= (1 << i);
     }
 
-    // -------------------------------
-    // PARSE BUTTONS (PARENTHESES)
-    // -------------------------------
     std::vector<int> buttons;
     size_t pos = r + 1;
 
@@ -93,9 +127,6 @@ int main(int argc, char *argv[]) {
     int B = buttons.size();
     int best = INT32_MAX;
 
-    // --------------------------------
-    // BRUTE FORCE ALL SUBSETS OF BUTTONS
-    // --------------------------------
     for (int subset = 0; subset < (1 << B); subset++) {
       int state = 0;
       for (int i = 0; i < B; i++) {

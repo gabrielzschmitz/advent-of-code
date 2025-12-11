@@ -1,8 +1,39 @@
 /**
  * @file part2.cpp
- * @brief Largest Red-Corner Rectangle
+ * @brief Machine Joltage Configuration Optimizer
  *
- * Puzzle Answer: [Largest Rectangle Area]
+ * This program determines the minimum number of button presses required to
+ * configure a set of machines to their correct target joltage levels.
+ *
+ * Each machine contains a series of joltage counters, all initialized to zero.
+ * A machine’s joltage requirements are represented as a list of integers,
+ * where each integer specifies the final required value for the corresponding
+ * counter index.
+ *
+ * Each button on a machine affects one or more counters. When a button is
+ * pressed, it increments all counters listed in that button’s wiring schematic
+ * by one. Buttons may be pressed any number of times.
+ *
+ * The objective is to compute the minimum total number of button presses needed
+ * so that all counters match the required joltage configuration for every
+ * machine. This is equivalent to solving a system of linear equations over the
+ * natural numbers, minimizing the sum of all button usages.
+ *
+ * Example:
+ * - A machine with requirements {3,5,4,7}
+ *   and buttons (3), (1,3), (2), (2,3), (0,2), (0,1)
+ *   can be configured in a minimum of 10 presses.
+ *
+ * Additional examples show machines requiring 12 and 11 minimum presses,
+ * respectively. Summing the minimum presses across all machines yields the
+ * total required button usage.
+ *
+ * The program parses each machine’s button schematics and joltage
+ * requirements, computes the minimum valid combination of button presses using
+ * an appropriate optimization method, and outputs the cumulative number of
+ * presses across all machines.
+ *
+ * Puzzle Answer: [Total Minimum Button Presses]
  *
  * @author [gabrielzschmitz]
  * @date [10/12/2025]
