@@ -102,6 +102,17 @@ This directory contains my solutions for the 2024 Advent of Code. Each day's
 directory has the input files, C++ code for both parts of the puzzles, and the
 prompts.
 
+## 2025
+
+<p align="center">
+    <img src="./img/2025-calendar.png" alt="2025 Advent of Code Calendar" width="400px">
+    <img src="./img/2025-leaderboard.png" alt="2025 Leaderboard" width="400px">
+</p>
+
+This directory contains my solutions for the 2025 Advent of Code. Each day's
+directory has the input files, C++ code for both parts of the puzzles, and the
+prompts.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
